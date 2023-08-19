@@ -1,9 +1,9 @@
 const userModel = require("../models/users")
 
 const register =(req , res )=>{
-    const {fname , lname , age , country , email , password} = req.body 
+    const {fname , lname , age , country , email , password ,role} = req.body 
 
-    const newUser = new userModel({fname , lname , age , country , email , password}) 
+    const newUser = new userModel({fname , lname , age , country , email , password ,role}) 
 
     newUser.save().then((result)=>{
         if(result){
