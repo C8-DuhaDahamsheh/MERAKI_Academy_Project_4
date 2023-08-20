@@ -29,11 +29,11 @@ const getAllCard = (req, res) => {
     });
 };
 
-const updatByUserId = (req, res) => {
-  const userId = req.params.id;
+const updteById = (req, res) => {
+  const id = req.params.id;
 
   cardModel
-    .findByIdAndUpdate({ user: userId }, req.body, { new: true })
+    .findByIdAndUpdate({ _id: id }, req.body, { new: true })
     .then((newCard) => {
       if (!newCard) {
         return res.status(404).json({
@@ -56,11 +56,39 @@ const updatByUserId = (req, res) => {
     });
 };
 
+const updatByUserId = (req, res) => {
+  const userId = req.params.id;
+
+  cardModel
+    .findOneAndUpdate({ user: userId }, req.body, { new: true })
+    .then((newCard) => {
+      console.log(newCard);
+      if (!newCard) {
+        return res.status(404).json({
+          success: false,
+          message: `The card with id => ${userId} not found`,
+        });
+      } else {
+        return res.status(202).json({
+          success: true,
+          message: `card updated`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 const updatByProductId = (req, res) => {
   const productId = req.params.id;
 
   cardModel
-    .findByIdAndUpdate({ product: productId }, req.body, { new: true })
+    .findOneAndUpdate({ product: productId }, req.body, { new: true })
     .then((newCard) => {
       if (!newCard) {
         return res.status(404).json({
@@ -88,9 +116,9 @@ const deleteCardById = (req, res) => {
   const id = req.params.id;
 
   cardModel
-    .findByIdAndDelete(id)
+    .findByIdAndDelete({ _id: id })
     .then((card) => {
-      if (!result) {
+      if (!card) {
         return res.status(404).json({
           success: false,
           message: `The card with id => ${id} not found`,
@@ -116,4 +144,5 @@ module.exports = {
   getAllCard,
   updatByProductId,
   updatByUserId,
+  updteById,
 };
