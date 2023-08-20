@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const cors = require("cors");
-const mongodb = require("./models/db")
+require("./models/db")
 const app = express();
+require("dotenv").config();
+
 const userRouter = require("./routes/users")
 const productRouter = require("./routes/product")
 const roleRouter = require ("./routes/role")
@@ -11,6 +13,7 @@ const cardRouter =require("./routes/card")
 const orderRouter=require("./routes/order")
 const PORT = process.env.PORT || 5000;
 
+console.log(process.env.DATABASE_URI);
 app.use(cors());
 app.use(express.json());
 
