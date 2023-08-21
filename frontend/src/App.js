@@ -17,7 +17,7 @@ const [categId , setCategId] = useState("")
       <userContext.Provider value={{categId , setCategId}}>
       <Routes>
         <Route path="/category" element={<Category />} />
-        <Route path= "" element={<Product/>}/>
+        <Route path= "/product" element={<Product/>}/>
       </Routes>
       </userContext.Provider>
     </div>

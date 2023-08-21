@@ -1,24 +1,30 @@
-import React ,{useContext ,useEffect, useState} from 'react'
+import React ,{useContext ,useEffect, useState ,useParams} from 'react'
 import { userContext } from '../../App'
 import axios from 'axios'
  const Product = () => {
     const {categId} = useContext(userContext)
+const [id , setId] = useState(categId)
 const [item , setItem]=useState([])
+console.log(id);
 useEffect(()=>{
-    axios.get(`http://localhost:5000/${categId}/category/`).then((respones)=>{
+    axios.get(`http://localhost:5000/product/${id}/category`).then((respones)=>{
+        console.log(respones);
         setItem(respones.data.product)
     }).catch((err)=>{
         console.log(err);
     })
 },[])
-console.log(categId);
+
 
   return (
     <div>
         <h1>Hello</h1>
-        {item.map((prod , i )=>{
+        {item.map((produc , i )=>{
             return <div key={i}>
-                <h1 >{prod.name}</h1>
+                
+                <img src={produc.image} width="200" height="200" />
+                <h3 >{produc.name}</h3>
+                <h3>{produc.price}</h3>
             </div>
         })}
     </div>

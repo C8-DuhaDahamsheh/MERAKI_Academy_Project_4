@@ -9,7 +9,7 @@ const [categ , setCateg] = useState([])
 const {setCategId} = useContext(userContext)
 const navigate = useNavigate() 
   const getAllCategory =()=>{
-    axios.get("http://localhost:5000/category/").then((respones)=>{
+    axios.get("http://localhost:5000/category").then((respones)=>{
       
        setCateg(respones.data.category)
     }).catch((err)=>{
@@ -30,9 +30,13 @@ const navigate = useNavigate()
         <h2 onClick={()=>{
             {setCategId(coll._id)}
             
-            navigate("/:id")
+            navigate("/product")
         }}>{coll.name}</h2>
-        <img src={coll.imag} width="200" height="200"></img>
+        <img src={coll.imag} width="200" height="200" onClick={()=>{
+            {setCategId(coll._id)}
+            
+            navigate("/product")
+        }}/>
         </div>)
       })}
     </div>
