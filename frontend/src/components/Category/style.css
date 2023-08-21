@@ -1,0 +1,12 @@
+.category{
+    border: 5px solid black;
+    margin: 10px;
+    
+}
+
+.collection{
+    border: 5px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
