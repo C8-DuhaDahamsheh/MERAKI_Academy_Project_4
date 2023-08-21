@@ -1,5 +1,5 @@
 import React ,{useEffect ,useState ,useContext} from 'react'
-import {useNavigate} from "react-router-dom"
+import {useNavigate ,Link} from "react-router-dom"
 import axios from "axios"
 import "../Category/style.css"
 import { userContext } from '../../App'
@@ -24,18 +24,21 @@ const navigate = useNavigate()
   return (
     <div className='collection' >
       
-      {categ.map((coll ,i)=>{
+      {categ.map((collction ,i)=>{
         
         return (<div key={i} className='category'>
+        
         <h2 onClick={()=>{
-            {setCategId(coll._id)}
+            {setCategId(collction._id)}
+            navigate(`/product/${collction._id}`)
+           }}>{collction.name}</h2>
+           
+           
+      
+        <img src={collction.imag} width="200" height="200" onClick={()=>{
+            {setCategId(collction._id)}
             
-            navigate("/product")
-        }}>{coll.name}</h2>
-        <img src={coll.imag} width="200" height="200" onClick={()=>{
-            {setCategId(coll._id)}
-            
-            navigate("/product")
+            navigate(`/product/${collction._id}`)
         }}/>
         </div>)
       })}
