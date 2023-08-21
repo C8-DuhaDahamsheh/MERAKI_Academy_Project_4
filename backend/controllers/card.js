@@ -1,21 +1,17 @@
 const card = require("../models/card");
 const cardModel = require("../models/card");
 
-const addCard = (req, res) => {
-  const { product, user, quantity } = req.body;
-
-  const newCard = new cardModel({ product, user, quantity });
-
-  newCard
-    .save()
-    .then((card) => {
-      res
-        .status(201)
-        .json({ succsee: true, message: "card created successfully", card });
-    })
-    .catch((err) => {
-      res.status(409).json({ succsee: false, message: "server error", err });
-    });
+const addCard = async (req, res) => {
+  try {
+    const { product, user, quantity } = req.body;
+    const newCard = new cardModel({ product, user, quantity });
+    const card = await newCard.save();
+    res
+      .status(201)
+      .json({ succsee: true, message: "card created successfully", card });
+  } catch (error) {
+    res.status(409).json({ succsee: false, message: "server error", error });
+  }
 };
 
 const getAllCard = (req, res) => {
