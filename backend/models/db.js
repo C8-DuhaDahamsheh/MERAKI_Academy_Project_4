@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
+// const url = process.env.DATABASE_URI
+// mongoose.set("strictQuery",false)
 mongoose
-  .connect("mongodb://127.0.0.1:27017/project_4")
+  .connect(process.env.DATABASE_URI)
   .then(() => {
     console.log("DB Ready To Use");
   })
   .catch((err) => {
+    console.log("hello");
     console.log(err);
   });

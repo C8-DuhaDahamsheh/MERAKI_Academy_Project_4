@@ -15,14 +15,13 @@ const register = (req, res) => {
     role,
   });
 
-//saler role id = "64e21139f853bb6a9f066186"
-//customer role id ="64e211c3a8d39e6e0caf32c0"
-
-
+  //saler role id = "64e21139f853bb6a9f066186"
+  //customer role id ="64e211c3a8d39e6e0caf32c0"
 
   newUser
     .save()
     .then((result) => {
+      
       if (result) {
         return res.status(201).json({
           success: true,
@@ -38,6 +37,13 @@ const register = (req, res) => {
           message: `The email already exists`,
         });
       }
+      if(err.errors){
+        return res.status(409).json({
+          success: false,
+          message: `The email should be like this (name_lastName@gmail.com)`,
+        });
+      }
+      console.log(err.errors);
       res.status(500).json({
         success: false,
         message: `Server Error`,
@@ -55,12 +61,10 @@ const login = (req, res) => {
     .populate("role")
     .then(async (result) => {
       if (result === null) {
-        res
-          .status(401)
-          .json({
-            success: false,
-            message: `The email doesn't exist or The password you’ve entered is incorrect`,
-          });
+        res.status(401).json({
+          success: false,
+          message: `The email doesn't exist or The password you’ve entered is incorrect`,
+        });
       }
       try {
         const valid = await bcrypt.compare(password, result.password);
@@ -92,9 +96,9 @@ const login = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({success: false,
-        message: `Server Error`,
-        err: err.message,});
+      res
+        .status(500)
+        .json({ success: false, message: `Server Error`, err: err.message });
     });
 };
 
