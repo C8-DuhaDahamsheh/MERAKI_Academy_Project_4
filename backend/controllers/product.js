@@ -56,4 +56,12 @@ const getByCategoryId = (req, res) => {
     });
 };
 
+
+
+const getProductById =(req , res)=>{
+  let id = req.params.id;
+
+  productModel.findById({})
+}
+
 module.exports = { addProduct, getByCategoryId };
