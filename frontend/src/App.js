@@ -9,26 +9,41 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Card from "./components/Card";
 
-export const userContext = createContext()
+export const userContext = createContext();
 function App() {
-  const tok = localStorage.getItem("token")
-const [categId , setCategId] = useState("")
-const [info , setInfo] = useState([])
-const [token , setToken] =useState(tok||"")
+  const tok = localStorage.getItem("token");
+  const [categId, setCategId] = useState("");
+  const [info, setInfo] = useState([]);
+  const [token, setToken] = useState(tok || "");
+  const [productId, setProductId] = useState("");
+  const [userId, setUserId] = useState("");
   return (
     <div className="App">
       <h1>Hello, World!</h1>
       <>slider</>
       <NavBar />
-      <userContext.Provider value={{info , setInfo,setCategId,categId , token , setToken}}>
-      <Routes>
-        <Route path="/category" element={<Category />} />
-        <Route path= "/product/:id" element={<Product/>}/>
-        <Route path="/productInfo/:id" element={<ProductInfo/>}/>
-        <Route path="/users/register" element={<Register/>}/>
-        <Route path="/users/login" element={<Login/>}/>
-        <Route path="/card" element={<Card/>}/>
-      </Routes>
+      <userContext.Provider
+        value={{
+          info,
+          setInfo,
+          setCategId,
+          categId,
+          token,
+          setToken,
+          productId,
+          setProductId,
+          userId,
+          setUserId,
+        }}
+      >
+        <Routes>
+          <Route path="/category" element={<Category />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/productInfo/:id" element={<ProductInfo />} />
+          <Route path="/users/register" element={<Register />} />
+          <Route path="/users/login" element={<Login />} />
+          <Route path="/card/:id" element={<Card />} />
+        </Routes>
       </userContext.Provider>
     </div>
   );

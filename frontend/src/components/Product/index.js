@@ -4,7 +4,7 @@ import { userContext } from "../../App";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo ,token } = useContext(userContext);
+  const { setInfo ,token ,setProductId} = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const { id } = useParams();
@@ -40,8 +40,9 @@ const Product = () => {
             <h3>{produc.name}</h3>
             <h3>{produc.price}</h3>
             <button onClick={()=>{
-              {token ? navigate("/card"):navigate('/users/login')}
-            }}>add to bag</button>
+              {setProductId(produc._id)}
+              {token ? navigate(`/card/${produc._id}`):navigate('/users/login')}
+            }}>ADD TO BAG</button>
           </div>
         );
       })}
