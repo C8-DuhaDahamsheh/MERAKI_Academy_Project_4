@@ -3,7 +3,8 @@ const cardModel = require("../models/card");
 
 const addCard = async (req, res) => {
   try {
-    const { product, user, quantity } = req.body;
+    const { product, quantity } = req.body;
+    const user = req.token.userId
     const newCard = new cardModel({ product, user, quantity });
     const card = await newCard.save();
     res
@@ -16,7 +17,7 @@ const addCard = async (req, res) => {
 
 const getAllCard = (req, res) => {
   cardModel
-    .find()
+    .find().populate("product")
     .then((card) => {
       res.status(200).json({ success: true, message: "all the card", card });
     })
