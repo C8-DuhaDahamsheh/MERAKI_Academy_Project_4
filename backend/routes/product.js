@@ -6,7 +6,7 @@ const productRouter = express.Router()
 
 productRouter.post("/" , addProduct)
 productRouter.get("/:id/category" ,getByCategoryId)
-productRouter.get("/:id/product" ,getProductById)
+productRouter.get("/:id" ,getProductById)
 
 
 module.exports = productRouter

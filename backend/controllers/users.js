@@ -12,7 +12,7 @@ const register = (req, res) => {
     country,
     email,
     password,
-    role,
+    role:"64e211c3a8d39e6e0caf32c0",
   });
 
   //saler role id = "64e21139f853bb6a9f066186"
@@ -81,7 +81,7 @@ const login = (req, res) => {
         };
 
         const options = {
-          expiresIn: "5h",
+          expiresIn: "24h",
         };
         const token = jwt.sign(payload, process.env.SECRET, options);
         console.log(token);
