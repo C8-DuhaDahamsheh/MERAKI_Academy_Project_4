@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userContext } from "../../App";
+import Loader from "react-js-loader";
 import axios from "axios";
 
 const Product = () => {
   const { setInfo, token, setProductId, productId, userId } =
     useContext(userContext);
-    const [quantity ,setQuantity]=useState("")
+  const [quantity, setQuantity] = useState("");
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const { id } = useParams();
@@ -23,10 +24,20 @@ const Product = () => {
       });
   }, []);
 
+  if (item===undefined) {
+    <div className={"item"}>
+      <Loader
+        type="bubble-loop"
+        bgColor={"pink"}
+        title={"bubble-loop"}
+        color={"pink"}
+        size={100}
+      />
+    </div>;
+  }
+
   return (
     <div>
-      <h1>Hello</h1>
-     
       {item.map((produc, i) => {
         return (
           <div key={i}>
@@ -41,30 +52,33 @@ const Product = () => {
             />
             <h3>{produc.name}</h3>
             <h3>{produc.price}</h3>
-            <input type="number" placeholder="Quantity" onChange={(e)=>{
-        setQuantity(e.target.value)
-      }}/>
+            <input
+              type="number"
+              placeholder="Quantity"
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+            />
             <button
               onClick={() => {
-                axios.post(
-                  "http://localhost:5000/card/",
-                  { product:produc._id,quantity},
-                  {
-                    headers: {
-                      authorization: `Bearer ${token}`,
-                    },
-                  }
-                ).then((respones)=>{
-                  console.log(respones.data);
-                  
-                    token
-                      ? navigate(`/card`)
-                      : navigate("/users/login");
-                  
-                }).catch((err)=>{
-                  console.log(err);
-                });
-               
+                axios
+                  .post(
+                    "http://localhost:5000/card/",
+                    { product: produc._id, quantity },
+                    {
+                      headers: {
+                        authorization: `Bearer ${token}`,
+                      },
+                    }
+                  )
+                  .then((respones) => {
+                    console.log(respones.data);
+
+                    token ? navigate(`/card`) : navigate("/users/login");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
             >
               ADD TO BAG
