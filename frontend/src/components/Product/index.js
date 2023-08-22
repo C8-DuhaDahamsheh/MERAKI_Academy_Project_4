@@ -9,10 +9,12 @@ const Product = () => {
   const [item, setItem] = useState([]);
   const { id } = useParams();
   console.log(id);
+  console.log(token);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}/category`)
       .then((respones) => {
+        
         setItem(respones.data.product);
       })
       .catch((err) => {
@@ -37,7 +39,9 @@ const Product = () => {
             />
             <h3>{produc.name}</h3>
             <h3>{produc.price}</h3>
-            <button >add to bag</button>
+            <button onClick={()=>{
+              {token ? navigate("/card"):navigate('/users/login')}
+            }}>add to bag</button>
           </div>
         );
       })}

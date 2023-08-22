@@ -7,6 +7,8 @@ import Product from "./components/Product";
 import ProductInfo from "./components/ProductInfo";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Card from "./components/Card";
+
 export const userContext = createContext()
 function App() {
   const tok = localStorage.getItem("token")
@@ -25,6 +27,7 @@ const [token , setToken] =useState(tok||"")
         <Route path="/productInfo/:id" element={<ProductInfo/>}/>
         <Route path="/users/register" element={<Register/>}/>
         <Route path="/users/login" element={<Login/>}/>
+        <Route path="/card" element={<Card/>}/>
       </Routes>
       </userContext.Provider>
     </div>
