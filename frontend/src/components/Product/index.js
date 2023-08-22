@@ -4,7 +4,9 @@ import { userContext } from "../../App";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo ,token ,setProductId} = useContext(userContext);
+  const { setInfo, token, setProductId, productId, userId } =
+    useContext(userContext);
+    const [quantity ,setQuantity]=useState("")
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const { id } = useParams();
@@ -14,7 +16,6 @@ const Product = () => {
     axios
       .get(`http://localhost:5000/product/${id}/category`)
       .then((respones) => {
-        
         setItem(respones.data.product);
       })
       .catch((err) => {
@@ -25,6 +26,7 @@ const Product = () => {
   return (
     <div>
       <h1>Hello</h1>
+     
       {item.map((produc, i) => {
         return (
           <div key={i}>
@@ -39,10 +41,34 @@ const Product = () => {
             />
             <h3>{produc.name}</h3>
             <h3>{produc.price}</h3>
-            <button onClick={()=>{
-              {setProductId(produc._id)}
-              {token ? navigate(`/card/${produc._id}`):navigate('/users/login')}
-            }}>ADD TO BAG</button>
+            <input type="number" placeholder="Quantity" onChange={(e)=>{
+        setQuantity(e.target.value)
+      }}/>
+            <button
+              onClick={() => {
+                axios.post(
+                  "http://localhost:5000/card/",
+                  { product:produc._id,quantity},
+                  {
+                    headers: {
+                      authorization: `Bearer ${token}`,
+                    },
+                  }
+                ).then((respones)=>{
+                  console.log(respones.data);
+                  
+                    token
+                      ? navigate(`/card`)
+                      : navigate("/users/login");
+                  
+                }).catch((err)=>{
+                  console.log(err);
+                });
+               
+              }}
+            >
+              ADD TO BAG
+            </button>
           </div>
         );
       })}

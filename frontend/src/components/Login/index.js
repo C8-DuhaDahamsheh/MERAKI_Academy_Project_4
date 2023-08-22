@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errMssg, setErrMssg] = useState("");
   const [succMssg, setSuccMssg] = useState("");
-  const { setToken, setUserId } = useContext(userContext);
+  const { setToken ,setUserId} = useContext(userContext);
 
   return (
     <div>
@@ -29,16 +29,19 @@ const Login = () => {
       />
       <button
         onClick={() => {
+
           axios
             .post("http://localhost:5000/users/login", { email, password })
             .then((response) => {
-              console.log(response);
-              setUserId(response.data._id);
+            console.log(response.data.userId);
+              setUserId(response.data.userId)
               setSuccMssg(response.data.message);
               setToken(response.data.token);
               localStorage.setItem("token", response.data.token);
+              localStorage.setItem("userId" ,response.data.userId )
             })
             .catch((err) => {
+                console.log(err);
               setErrMssg(err.response.data.message);
             });
         }}

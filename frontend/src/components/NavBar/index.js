@@ -5,6 +5,14 @@ const NavBar = () => {
   return (
     <div>
       <Link to="/category">Category</Link>
+      <br/>
+      <Link to="/users/login">Login</Link>
+      <br/>
+      <Link to="/users/register">Register</Link>
+      <br/>
+      <Link to="/card">Card</Link>
+      
+
     </div>
   );
 };

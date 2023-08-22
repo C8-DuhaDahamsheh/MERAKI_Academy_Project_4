@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useId } from "react";
 import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Category from "./components/Category";
@@ -12,11 +12,12 @@ import Card from "./components/Card";
 export const userContext = createContext();
 function App() {
   const tok = localStorage.getItem("token");
+  const usrId = localStorage.getItem("userId")
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
   const [productId, setProductId] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(usrId||"");
   return (
     <div className="App">
       <h1>Hello, World!</h1>
@@ -27,8 +28,8 @@ function App() {
           info,
           setInfo,
           setCategId,
-          categId,
-          token,
+          categId ,
+          token ,
           setToken,
           productId,
           setProductId,
@@ -42,7 +43,7 @@ function App() {
           <Route path="/productInfo/:id" element={<ProductInfo />} />
           <Route path="/users/register" element={<Register />} />
           <Route path="/users/login" element={<Login />} />
-          <Route path="/card/:id" element={<Card />} />
+          <Route path="/card" element={<Card />} />
         </Routes>
       </userContext.Provider>
     </div>

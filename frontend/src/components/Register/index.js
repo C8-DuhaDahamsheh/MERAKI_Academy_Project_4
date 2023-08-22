@@ -11,6 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  
 const navigate = useNavigate()
   return (
     <div>
@@ -74,6 +75,8 @@ const navigate = useNavigate()
               country,
             })
             .then((response) => {
+              
+            
               setSuccess(response.data.message);
             navigate("/users/login")
             }).catch((err)=>{

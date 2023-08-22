@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
+import React, { useEffect, useState ,useContext } from "react";
+import { useParams ,useNavigate } from "react-router-dom";
+import { userContext } from "../../App";
 import axios from "axios";
 
 const ProductInfo = () => {
   const [itemInfo, setItemInfo] = useState(null);
-
+  const [quantity ,setQuantity]=useState("")
+  const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-
+const {token} =useContext(userContext)
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
@@ -23,6 +24,7 @@ const ProductInfo = () => {
 
   if (!itemInfo) {
     return <h1>loding</h1>;
+    
   }
   return (
     <div>
@@ -39,8 +41,35 @@ const ProductInfo = () => {
       {itemInfo.color.map((colr, i) => {
         return <button>{colr}</button>;
       })}
+      <input type="number" placeholder="Quantity" onChange={(e)=>{
+        setQuantity(e.target.value)
+      }}/>
       <br/>
-      <button>ADD TO BAG</button>
+      <button
+              onClick={() => {
+                axios.post(
+                  "http://localhost:5000/card/",
+                  { product:itemInfo._id,quantity},
+                  {
+                    headers: {
+                      authorization: `Bearer ${token}`,
+                    },
+                  }
+                ).then((respones)=>{
+                  console.log(respones.data);
+                  
+                    token
+                      ? navigate(`/card`)
+                      : navigate("/users/login");
+                  
+                }).catch((err)=>{
+                  console.log(err);
+                });
+               
+              }}
+            >
+              ADD TO BAG
+            </button>
     </div>
   );
 };

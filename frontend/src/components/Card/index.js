@@ -1,26 +1,38 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { userContext } from "../../App";
 const Card = () => {
-const {userId , productId}=useContext(userContext)
-  const { id } = useParams();
+  const { token } = useContext(userContext);
+  
   const [item, setItem] = useState([]);
   useEffect(() => {
-    axios.post("http://localhost:5000/card")
+    axios
+      .get("http://localhost:5000/card", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        
+        setItem(response.data.card);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-  console.log(item);
+  
   if (!item) {
     return <h1>loding</h1>;
   }
   return (
     <div>
       {item.map((store, i) => {
+
         return (
           <div key={i}>
-            <img src={store.image} width="100" height="100" />
-            <h3>{store.name}</h3>
-            <h3>Price :{store.price}</h3>
+            <img src={store.product.image} width="100" height="100" />
+            <h3>{store.product.name}</h3>
+            <h3>Price :{store.product.price}</h3>
           </div>
         );
       })}
