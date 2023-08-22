@@ -4,9 +4,9 @@ import { userContext } from "../../App";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo } = useContext(userContext);
+  const { setInfo ,token } = useContext(userContext);
   const navigate = useNavigate();
-  const [item, setItem] = useState();
+  const [item, setItem] = useState([]);
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -31,13 +31,13 @@ const Product = () => {
               width="200"
               height="200"
               onClick={() => {
-                setInfo(item);
+                setInfo(produc._id);
                 navigate(`/productInfo/${produc._id}`);
               }}
             />
             <h3>{produc.name}</h3>
             <h3>{produc.price}</h3>
-            <button>add to bag</button>
+            <button >add to bag</button>
           </div>
         );
       })}

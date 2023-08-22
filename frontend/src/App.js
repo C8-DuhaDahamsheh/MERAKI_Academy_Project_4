@@ -5,21 +5,24 @@ import NavBar from "./components/NavBar";
 import Category from "./components/Category";
 import Product from "./components/Product";
 import ProductInfo from "./components/ProductInfo";
-
+import Register from "./components/Register";
 export const userContext = createContext()
 function App() {
+  const tok = localStorage.getItem("token")
 const [categId , setCategId] = useState("")
 const [info , setInfo] = useState([])
+const [token , setToken] =useState(tok||"")
   return (
     <div className="App">
       <h1>Hello, World!</h1>
       <>slider</>
       <NavBar />
-      <userContext.Provider value={{info , setInfo,setCategId,categId}}>
+      <userContext.Provider value={{info , setInfo,setCategId,categId , token , setToken}}>
       <Routes>
         <Route path="/category" element={<Category />} />
         <Route path= "/product/:id" element={<Product/>}/>
         <Route path="/productInfo/:id" element={<ProductInfo/>}/>
+        <Route path="/users/register" element={<Register/>}/>
       </Routes>
       </userContext.Provider>
     </div>

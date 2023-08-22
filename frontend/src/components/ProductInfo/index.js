@@ -4,26 +4,33 @@ import { userContext } from "../../App";
 import axios from "axios";
 
 const ProductInfo = () => {
- const [itemInfo , setItemInfo] = useState()
-    
-const {id}=useParams()
-  useEffect(()=>{
-    axios.get(`http://localhost:5000/product/${id}`).then((response)=>{
-      
-setItemInfo(response.data.product)
-    }).catch((error)=>{
-      console.log(error);
-    })
-  },[])
+  const [itemInfo, setItemInfo] = useState();
+  const { info } = useContext(userContext);
+  const { id } = useParams();
+  console.log(id);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/product/${id}`)
+      .then((response) => {
+        console.log(response.data.product);
+        setItemInfo(response.data.product);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-console.log(id);
-console.log(itemInfo);
+  console.log(itemInfo);
 
-  return <div>
-      
+  return (
+    <div>
+      {/* <img src={itemInfo.image} width="200" height="200" /> */}
+      {/* <h3>{itemInfo.name}</h3>
+      <h3>{itemInfo.price}</h3>
+      <h3>{itemInfo.discreption}</h3> */}
     </div>
-  
-  }
+  );
+};
 
 export default ProductInfo;
