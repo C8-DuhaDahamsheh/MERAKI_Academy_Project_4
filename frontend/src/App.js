@@ -19,7 +19,7 @@ const [info , setInfo] = useState([])
       <Routes>
         <Route path="/category" element={<Category />} />
         <Route path= "/product/:id" element={<Product/>}/>
-        <Route path="/productInfo" element={<ProductInfo/>}/>
+        <Route path="/productInfo/:id" element={<ProductInfo/>}/>
       </Routes>
       </userContext.Provider>
     </div>

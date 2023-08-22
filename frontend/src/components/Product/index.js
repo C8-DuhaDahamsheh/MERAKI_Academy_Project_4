@@ -6,7 +6,7 @@ import axios from "axios";
 const Product = () => {
   const { setInfo } = useContext(userContext);
   const navigate = useNavigate();
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState();
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -32,7 +32,7 @@ const Product = () => {
               height="200"
               onClick={() => {
                 setInfo(item);
-                navigate("/productInfo");
+                navigate(`/productInfo/${produc._id}`);
               }}
             />
             <h3>{produc.name}</h3>
