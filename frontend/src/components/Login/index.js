@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
 import { userContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errMssg, setErrMssg] = useState("");
+  const [succMssg, setSuccMssg] = useState("");
   const { setToken } = useContext(userContext);
 
   return (
@@ -24,13 +27,27 @@ const Login = () => {
           setPassword(e.target.value);
         }}
       />
-      <button onClick={async()=>{
-        try {
-            axios.post("http://localhost:5000/users/login", { email, password })
-        } catch (error) {
-            
-        }
-      }}>Login</button>
+      <button
+        onClick={() => {
+          axios
+            .post("http://localhost:5000/users/login", { email, password })
+            .then((response) => {
+              console.log(response);
+
+              setSuccMssg(response.data.message);
+              setToken(response.data.token);
+              localStorage.setItem("token", response.data.token);
+            })
+            .catch((err) => {
+              setErrMssg(err.response.data.message);
+            });
+        }}
+      >
+        Login
+      </button>
+
+      <h2>{succMssg}</h2>
+      <h2>{errMssg}</h2>
     </div>
   );
 };

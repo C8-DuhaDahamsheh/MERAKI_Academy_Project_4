@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [fName, setFirstName] = useState("");
@@ -10,7 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
+const navigate = useNavigate()
   return (
     <div>
       <h3>Register</h3>
@@ -74,6 +75,7 @@ const Register = () => {
             })
             .then((response) => {
               setSuccess(response.data.message);
+            navigate("/users/login")
             }).catch((err)=>{
                 console.log(err);
                 setError(err.response.data.err)
