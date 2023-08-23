@@ -8,6 +8,7 @@ import ProductInfo from "./components/ProductInfo";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Card from "./components/Card";
+import axios from "axios";
 // import Carousel from 'react-bootstrap/Carousel';
 export const userContext = createContext();
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [productId, setProductId] = useState("");
 const [show , setShow]=useState(false)
   const [userId, setUserId] = useState(usrId || "");
+  const navigate = useNavigate()
   const ProductList = [
     "Airsense Pleated Pants",
     "Men's Lakewashed Stretch Khakis, Natural Fit, Straight Leg",
@@ -95,9 +97,18 @@ const [show , setShow]=useState(false)
           return <div>
             
             <h4 key={i} onClick={()=>{
-
+axios.get(`http://localhost:5000/product?name=${item}`).then((response)=>{
+  console.log(response);
+  setShow(false)
+  navigate(`/productInfo/${response.data.product[0]._id}`)
+}).catch((err)=>{
+  console.log(err);
+})
             }}>{item}</h4></div>
         })}
+        <button onClick={()=>{
+          setShow(false)
+        }}>close</button>
       </div>:<></>}
      
       <userContext.Provider
