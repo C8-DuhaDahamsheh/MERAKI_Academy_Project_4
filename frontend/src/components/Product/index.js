@@ -5,7 +5,7 @@ import Loader from "react-js-loader";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo, token, setProductId, productId, userId } =
+  const { setInfo, token, setProductId, productId, userId ,setShow} =
     useContext(userContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -37,6 +37,7 @@ const Product = () => {
 
   return (
     <div>
+      {setShow(false)}
       {item.map((produc, i) => {
         return (
           <div key={i}>

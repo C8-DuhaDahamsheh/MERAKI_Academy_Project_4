@@ -8,11 +8,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errMssg, setErrMssg] = useState("");
   const [succMssg, setSuccMssg] = useState("");
-  const { setToken ,setUserId} = useContext(userContext);
+  const { setToken ,setUserId ,setShow} = useContext(userContext);
 
   return (
     <div>
       <h1>Login</h1>
+      {setShow(false)}
       <input
         type="email"
         placeholder="Email"

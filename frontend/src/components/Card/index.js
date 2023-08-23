@@ -3,9 +3,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 const Card = () => {
-  const { token } = useContext(userContext);
+  const { token ,setShow ,setCardId ,cardId ,userId} = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAdress] = useState("");
+const [success , setSuccess]=useState("")
   useEffect(() => {
     axios
       .get("http://localhost:5000/card", {
@@ -14,6 +17,7 @@ const Card = () => {
         },
       })
       .then((response) => {
+        setCardId(response.data.card._id)
         setItem(response.data.card);
       })
       .catch((err) => {
@@ -26,7 +30,10 @@ const Card = () => {
   }
   return (
     <div>
+      
       {item.map((store, i) => {
+
+        
         return (
           <div key={i}>
             <img
@@ -70,6 +77,44 @@ const Card = () => {
           </div>
         );
       })}
+       <input
+        type="text"
+        placeholder="Phone Number"
+        onChange={(e) => {
+          setPhoneNumber(e.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="Your Address"
+        onChange={(e) => {
+          setAdress(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          axios
+            .post("http://localhost:5000/order/", {
+              user: userId,
+              card :cardId,
+              phoneNumber,
+              address,
+            })
+            .then((response) => {
+                setSuccess(response.data.message)
+              console.log(response.data.message);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      >
+        Submit
+      </button>
+      <h4>{success}</h4>
+      <button onClick={()=>{
+        navigate("/order")
+      }}>Order It?</button>
     </div>
   );
 };

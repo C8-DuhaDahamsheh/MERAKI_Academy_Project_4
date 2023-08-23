@@ -10,7 +10,7 @@ const ProductInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-  const { token } = useContext(userContext);
+  const { token ,setShow} = useContext(userContext);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
@@ -26,6 +26,7 @@ const ProductInfo = () => {
   if (!itemInfo) {
     return (
       <div className={"item"}>
+        {setShow(false)}
         <Loader
           type="bubble-loop"
           bgColor={"pink"}
