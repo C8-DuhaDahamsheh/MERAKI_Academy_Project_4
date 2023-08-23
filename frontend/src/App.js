@@ -21,8 +21,8 @@ function App() {
   const [productId, setProductId] = useState("");
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState(usrId || "");
-const[cardId , setCardId]=useState("")
-const [order , setOrder]=useState("")
+const[cardId , setCardId]=useState([])
+const [orderId , setOrderId]=useState()
   return (
     <div className="App">
       <h1>Hello, World!</h1>
@@ -85,7 +85,9 @@ const [order , setOrder]=useState("")
           setUserId,
           setShow,
           cardId,
-          setCardId
+          setCardId,
+          orderId,
+          setOrderId
         }}
       >
         <Routes>

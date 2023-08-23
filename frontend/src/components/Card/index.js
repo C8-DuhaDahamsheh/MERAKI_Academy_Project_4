@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 const Card = () => {
-  const { token ,setShow ,setCardId ,cardId ,userId} = useContext(userContext);
+  const { token ,setShow ,setCardId ,cardId ,userId ,setOrderId }  = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -17,7 +17,8 @@ const [success , setSuccess]=useState("")
         },
       })
       .then((response) => {
-        setCardId(response.data.card._id)
+        console.log(response.data);
+        
         setItem(response.data.card);
       })
       .catch((err) => {
@@ -33,6 +34,7 @@ const [success , setSuccess]=useState("")
       
       {item.map((store, i) => {
 
+       
         
         return (
           <div key={i}>
@@ -93,6 +95,7 @@ const [success , setSuccess]=useState("")
       />
       <button
         onClick={() => {
+          console.log(cardId)
           axios
             .post("http://localhost:5000/order/", {
               user: userId,
@@ -102,7 +105,9 @@ const [success , setSuccess]=useState("")
             })
             .then((response) => {
                 setSuccess(response.data.message)
-              console.log(response.data.message);
+          setOrderId(response.data.order._id)
+
+              
             })
             .catch((err) => {
               console.log(err);

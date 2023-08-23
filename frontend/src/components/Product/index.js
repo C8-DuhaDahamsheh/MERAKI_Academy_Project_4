@@ -5,7 +5,7 @@ import Loader from "react-js-loader";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo, token, setProductId, productId, userId ,setShow} =
+  const { setInfo, token, setProductId, productId, userId ,setShow ,setCardId,cardId} =
     useContext(userContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -79,7 +79,8 @@ const Product = () => {
                     }
                   )
                   .then((respones) => {
-                    console.log(respones.data);
+                    setCardId([...cardId , respones.data.card._id])
+                    console.log(respones.data.card._id);
 
                     token ? (
                       <h1>successfully Add To Bag</h1>
