@@ -60,17 +60,17 @@ const getByCategoryId = (req, res) => {
 const getProductByName = (req,res)=>{
   let name= req.query.name
 
-  productModel.find({product:name}).then((product)=>{
-    
+  productModel.find({name:name}).then((product)=>{
+    console.log(product);
     if (!product) {
       return res.status(404).json({
         success: false,
-        message: `The product with name => ${nam} not found`,
+        message: `The product with name => ${name} not found`,
       });
     }
     res.status(200).json({
       success: true,
-      message: `The product ${nam} `,
+      message: `The product ${name} `,
       product,
     });
   }).catch((err)=>{
