@@ -8,28 +8,28 @@ import ProductInfo from "./components/ProductInfo";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Card from "./components/Card";
-
+import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 export const userContext = createContext();
 function App() {
   const tok = localStorage.getItem("token");
-  const usrId = localStorage.getItem("userId")
+  const usrId = localStorage.getItem("userId");
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
   const [productId, setProductId] = useState("");
-  const [userId, setUserId] = useState(usrId||"");
+  const [userId, setUserId] = useState(usrId || "");
   return (
     <div className="App">
       <h1>Hello, World!</h1>
-      <>slider</>
+     
       <NavBar />
       <userContext.Provider
         value={{
           info,
           setInfo,
           setCategId,
-          categId ,
-          token ,
+          categId,
+          token,
           setToken,
           productId,
           setProductId,
@@ -38,7 +38,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="" element={<Category/>}/>
+          <Route path="" element={<Category />} />
           <Route path="/category" element={<Category />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/productInfo/:id" element={<ProductInfo />} />

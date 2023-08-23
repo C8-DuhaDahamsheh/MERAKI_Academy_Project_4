@@ -7,12 +7,11 @@ import axios from "axios";
 const Product = () => {
   const { setInfo, token, setProductId, productId, userId } =
     useContext(userContext);
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const { id } = useParams();
-  console.log(id);
-  console.log(token);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}/category`)
@@ -24,7 +23,7 @@ const Product = () => {
       });
   }, []);
 
-  if (item===undefined) {
+  if (item === undefined) {
     <div className={"item"}>
       <Loader
         type="bubble-loop"
@@ -50,15 +49,22 @@ const Product = () => {
                 navigate(`/productInfo/${produc._id}`);
               }}
             />
-            <h3>{produc.name}</h3>
+            <h3
+              onClick={() => {
+                setInfo(produc._id);
+                navigate(`/productInfo/${produc._id}`);
+              }}
+            >
+              {produc.name}
+            </h3>
             <h3>{produc.price}</h3>
-            <input
+            {/* <input
               type="number"
               placeholder="Quantity"
               onChange={(e) => {
                 setQuantity(e.target.value);
               }}
-            />
+            /> */}
             <button
               onClick={() => {
                 axios
@@ -74,7 +80,11 @@ const Product = () => {
                   .then((respones) => {
                     console.log(respones.data);
 
-                    token ? navigate(`/card`) : navigate("/users/login");
+                    token ? (
+                      <h1>successfully Add To Bag</h1>
+                    ) : (
+                      navigate("/users/login")
+                    );
                   })
                   .catch((err) => {
                     console.log(err);

@@ -45,12 +45,13 @@ const ProductInfo = () => {
       <h3>{itemInfo.discreption}</h3>
       <h3>Size :</h3>
       {itemInfo.size.map((siz, i) => {
-        return <button>{siz}</button>;
+        return <button key={i}>{siz}</button>;
       })}
       <h3>Color :</h3>
       {itemInfo.color.map((colr, i) => {
-        return <button>{colr}</button>;
+        return <button key={i}>{colr}</button>;
       })}
+      <br/>
       <input
         type="number"
         placeholder="Quantity"
