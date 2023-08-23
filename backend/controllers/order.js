@@ -2,14 +2,13 @@ const order = require("../models/order");
 const orderModel = require("../models/order");
 
 const creatOrder = (req, res) => {
-  const { user, card, phoneNumber } = req.body;
+  const { user, card, phoneNumber, address } = req.body;
 
-  const newOrder = new orderModel({ user, card, phoneNumber });
+  const newOrder = new orderModel({ user, card, phoneNumber, address });
 
   newOrder
     .save()
-    .populate("user")
-    .populate("card")
+
     .then((order) => {
       res.status(201).json({
         success: true,
@@ -31,7 +30,7 @@ const getOrderById = (req, res) => {
 
   orderModel
     .findById(id)
-    .populate("user")
+
     .populate("card")
     .then((order) => {
       if (!order) {
@@ -60,7 +59,7 @@ const updatOrderById = (req, res) => {
 
   orderModel
     .findByIdAndUpdate({ _id: id }, req.body, { new: true })
-    .populate("user")
+
     .populate("card")
     .then((newOrder) => {
       if (!newOrder) {
@@ -110,5 +109,4 @@ const deleteOrderById = (req, res) => {
     });
 };
 
-
-module.exports = {creatOrder , getOrderById , updatOrderById , deleteOrderById}
+module.exports = { creatOrder, getOrderById, updatOrderById, deleteOrderById };
