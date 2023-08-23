@@ -57,7 +57,31 @@ const getByCategoryId = (req, res) => {
 };
 
 
+const getProductByName = (req,res)=>{
+  let name= req.query.name
 
+  productModel.find({product:name}).then((product)=>{
+    
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: `The product with name => ${nam} not found`,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: `The product ${nam} `,
+      product,
+    });
+  }).catch((err)=>{
+    
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+      err: err.message,
+    });
+  })
+}
 const getProductById =(req , res)=>{
   let id = req.params.id;
 
@@ -82,4 +106,4 @@ const getProductById =(req , res)=>{
   })
 }
 
-module.exports = { addProduct, getByCategoryId ,getProductById};
+module.exports = { addProduct, getByCategoryId ,getProductById ,getProductByName};
