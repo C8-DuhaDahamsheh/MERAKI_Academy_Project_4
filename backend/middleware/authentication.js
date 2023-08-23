@@ -5,7 +5,7 @@ const authentication = (req, res, next) => {
   
   try {
     
-    console.log(req.headers);
+    
     if (!req.headers.authorization) {
       return res.status(403).json({
         success: false,
