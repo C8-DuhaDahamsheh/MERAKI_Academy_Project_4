@@ -33,7 +33,7 @@ const getByCategoryId = (req, res) => {
   let id = req.params.id;
 
   productModel
-    .find({category:id}).populate("category")
+    .find({category:id}).populate("category").exec()
     .then((product) => {
       if (!product) {
         return res.status(404).json({
@@ -60,7 +60,7 @@ const getByCategoryId = (req, res) => {
 const getProductByName = (req,res)=>{
   let name= req.query.name
 
-  productModel.find({name:name}).then((product)=>{
+  productModel.find({name:name}).exec().then((product)=>{
     console.log(product);
     if (!product) {
       return res.status(404).json({

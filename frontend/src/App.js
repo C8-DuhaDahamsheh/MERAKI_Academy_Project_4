@@ -15,6 +15,7 @@ export const userContext = createContext();
 function App() {
   const tok = localStorage.getItem("token");
   const usrId = localStorage.getItem("userId");
+  const ordrId = localStorage.getItem("orderId")
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
@@ -22,7 +23,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState(usrId || "");
 const[cardId , setCardId]=useState([])
-const [orderId , setOrderId]=useState()
+const [orderId , setOrderId]=useState(ordrId||"")
   return (
     <div className="App">
       <h1>Hello, World!</h1>

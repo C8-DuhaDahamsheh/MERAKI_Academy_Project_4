@@ -6,22 +6,29 @@ const Order = () => {
   const {orderId}=useContext(userContext)
   useEffect(()=>{
     axios.get(`http://localhost:5000/order/${orderId}`).then((response)=>{
-        console.log(response.data);
-        setOrder(response.data.order.card)
+        console.log(response.data.order);
+
+        setOrder(response.data.order)
     }).catch((err)=>{
 console.log(err);
     })
   },[])
+  if(!order){
+    return <h4>hi</h4>
+  }
   return (
     <div>
-    {order.map((card,i)=>{
+      <h4>hiiii</h4>
+      <h4>ADDRESS :</h4>
+      <h4>{order.address}</h4>
+      <h4>PHONE NUMBER :</h4>
+      <h4>{order.phoneNumber}</h4>
+      {/* {order.card.map((crd,i)=>{
         return <div>
-            <h4>{card.name}</h4>
-            <h4>{card.image}</h4>
-
+          <h4>{crd.product}</h4>
         </div>
-    })}
-    </div>
+      })} */}
+       </div>
   );
 };
 

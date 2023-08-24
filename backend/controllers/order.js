@@ -4,7 +4,7 @@ const orderModel = require("../models/order");
 const creatOrder = (req, res) => {
   const { user, card, phoneNumber, address } = req.body;
 
-  const newOrder = new orderModel({ user, card, phoneNumber, address });
+  const newOrder = new orderModel({ user, card, phoneNumber, address ,chekedOut :"Not Cheked Out "});
 
   newOrder
     .save()
@@ -31,7 +31,18 @@ const getOrderById = (req, res) => {
   orderModel
     .findById(id)
 
-    .populate("card")
+    .populate({
+      path: 'card',
+      model: "Card",
+      populate: {
+          path: 'product',
+          model: 'Product'
+      }
+  }).populate({
+    path: 'user',
+    model: "User"
+   
+})
     .then((order) => {
       if (!order) {
         return res.status(404).json({

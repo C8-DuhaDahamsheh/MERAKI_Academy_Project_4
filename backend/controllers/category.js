@@ -25,7 +25,7 @@ const addCatgory = (req, res) => {
 
 const getAllCtegory = (req, res) => {
   categoryModel
-    .find()
+    .find().exec()
     .then((category) => {
       res
         .status(200)

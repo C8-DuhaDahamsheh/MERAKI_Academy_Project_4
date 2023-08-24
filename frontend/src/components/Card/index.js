@@ -106,7 +106,7 @@ const [success , setSuccess]=useState("")
             .then((response) => {
                 setSuccess(response.data.message)
           setOrderId(response.data.order._id)
-
+           localStorage.setItem("orderId" , response.data.order._id)
               
             })
             .catch((err) => {
