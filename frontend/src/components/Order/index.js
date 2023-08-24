@@ -3,32 +3,48 @@ import axios from "axios";
 import { userContext } from "../../App";
 const Order = () => {
   const [order, setOrder] = useState([]);
-  const {orderId}=useContext(userContext)
-  useEffect(()=>{
-    axios.get(`http://localhost:5000/order/${orderId}`).then((response)=>{
-        console.log(response.data.order);
+  const [card, setCard] = useState([]);
+const [users , setUsers]=useState("")
+  const { orderId } = useContext(userContext);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/order/${orderId}`)
+      .then((response) => {
+        console.log(response.data);
+        setCard(response.data.order.card);
+        setOrder(response.data.order);
+        setUsers(response.data.order.user)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-        setOrder(response.data.order)
-    }).catch((err)=>{
-console.log(err);
-    })
-  },[])
-  if(!order){
-    return <h4>hi</h4>
-  }
   return (
     <div>
-      <h4>hiiii</h4>
-      <h4>ADDRESS :</h4>
+      <h4>Your Address:</h4>
       <h4>{order.address}</h4>
-      <h4>PHONE NUMBER :</h4>
+      <h4>Your Phone Number :</h4>
       <h4>{order.phoneNumber}</h4>
-      {/* {order.card.map((crd,i)=>{
-        return <div>
-          <h4>{crd.product}</h4>
-        </div>
-      })} */}
-       </div>
+      <h4>Costumer Name :</h4>
+      <h4>{users.fname} {users.lname}</h4>
+      <h4>{users.email}</h4>
+      <h4>{users.country}</h4>
+      
+      
+      
+
+      {card.map((product, i) => {
+       
+        return (
+          <div key={i}>
+            <h4>{product.product.name}</h4>
+            <img src={product.product.image} width="70" height="70" />
+          </div>
+        );
+      })}
+
+    </div>
   );
 };
 

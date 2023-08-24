@@ -67,8 +67,8 @@ const navigate = useNavigate()
         onClick={() => {
           axios
             .post("http://localhost:5000/users/register", {
-              fName,
-              lName,
+              fname :fName,
+              lname:lName,
               email,
               password,
               age,
