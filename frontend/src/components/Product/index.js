@@ -5,7 +5,7 @@ import Loader from "react-js-loader";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo, token, setProductId, productId, userId ,setShow ,setCardId,cardId} =
+  const { setInfo, token, setProductId, productId, userId ,setShow ,setCardId,cardId } =
     useContext(userContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -68,10 +68,12 @@ const Product = () => {
             /> */}
             <button
               onClick={() => {
+                
+
                 axios
                   .post(
                     "http://localhost:5000/card/",
-                    { product: produc._id, quantity },
+                    { product: produc._id, quantity ,ordered :false },
                     {
                       headers: {
                         authorization: `Bearer ${token}`,
@@ -80,6 +82,7 @@ const Product = () => {
                   )
                   .then((respones) => {
                     setCardId([...cardId , respones.data.card._id])
+                    localStorage.setItem("cardId",respones.data.card._id)
                     console.log(respones.data.card._id);
 
                     token ? (

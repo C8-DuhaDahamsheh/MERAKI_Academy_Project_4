@@ -16,6 +16,7 @@ function App() {
   const tok = localStorage.getItem("token");
   const usrId = localStorage.getItem("userId");
   const ordrId = localStorage.getItem("orderId")
+  const crdId = localStorage.getItem("cardId")
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
@@ -24,6 +25,8 @@ function App() {
   const [userId, setUserId] = useState(usrId || "");
 const[cardId , setCardId]=useState([])
 const [orderId , setOrderId]=useState(ordrId||"")
+const [ordered , setOrdered] = useState(false)
+
   return (
     <div className="App">
       <h1>Hello, World!</h1>
@@ -88,7 +91,9 @@ const [orderId , setOrderId]=useState(ordrId||"")
           cardId,
           setCardId,
           orderId,
-          setOrderId
+          setOrderId ,
+          ordered,
+          setOrdered
         }}
       >
         <Routes>

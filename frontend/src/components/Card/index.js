@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 const Card = () => {
-  const { token ,setShow ,setCardId ,cardId ,userId ,setOrderId }  = useContext(userContext);
+  const { token ,setShow ,setCardId ,cardId ,userId ,setOrderId ,ordered,setOrdered}  = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -17,7 +17,7 @@ const [success , setSuccess]=useState("")
         },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.card);
         
         setItem(response.data.card);
       })
@@ -106,6 +106,7 @@ const [success , setSuccess]=useState("")
             .then((response) => {
                 setSuccess(response.data.message)
           setOrderId(response.data.order._id)
+          
            localStorage.setItem("orderId" , response.data.order._id)
               
             })
@@ -118,7 +119,17 @@ const [success , setSuccess]=useState("")
       </button>
       <h4>{success}</h4>
       <button onClick={()=>{
-        navigate("/order")
+        console.log(cardId);
+      axios.put(`http://localhost:5000/card/${cardId}`,{ordered:true},{
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }).then((response)=>{
+        console.log(response.data);
+      }).catch((err)=>{
+        console.log(err);
+      })
+        // navigate("/order")
       }}>Order It?</button>
     </div>
   );
