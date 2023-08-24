@@ -7,6 +7,7 @@ const {
   updatByProductId,
   updatByUserId,
   updteById,
+  deletAllCard
 } = require("../controllers/card");
 
 const authentication = require("../middleware/authentication");
@@ -35,5 +36,7 @@ cardRouter.delete(
   authorization("add card"),
   deleteCardById
 );
-
+cardRouter.delete("/user/:id",
+authentication,
+authorization("add card"),deletAllCard)
 module.exports = cardRouter;

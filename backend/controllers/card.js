@@ -3,9 +3,9 @@ const cardModel = require("../models/card");
 
 const addCard = async (req, res) => {
   try {
-    const { product, quantity } = req.body;
+    const { product, quantity ,ordered} = req.body;
     const user = req.token.userId
-    const newCard = new cardModel({ product, user, quantity });
+    const newCard = new cardModel({ product, user, quantity ,ordered });
     const card = await newCard.save();
     res
       .status(201)
@@ -135,6 +135,27 @@ const deleteCardById = (req, res) => {
     });
 };
 
+const deletAllCard =(req,res)=>{
+  const userId = req.params.id
+  cardModel.deleteMany({user :userId}).then((card)=>{
+    if (!card) {
+      return res.status(404).json({
+        success: false,
+        message: `The card with user id => ${userId} not found`,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: `card deleted`,
+    });
+  }).catch((err)=>{
+
+    console.log(err);
+  })
+}
+
+
+
 module.exports = {
   addCard,
   deleteCardById,
@@ -142,4 +163,5 @@ module.exports = {
   updatByProductId,
   updatByUserId,
   updteById,
+  deletAllCard
 };
