@@ -3,9 +3,9 @@ const cardModel = require("../models/card");
 
 const addCard = async (req, res) => {
   try {
-    const { product, quantity ,ordered} = req.body;
+    const { product, quantity } = req.body;
     const user = req.token.userId
-    const newCard = new cardModel({ product, user, quantity ,ordered });
+    const newCard = new cardModel({ product, user, quantity  });
     const card = await newCard.save();
     res
       .status(201)
