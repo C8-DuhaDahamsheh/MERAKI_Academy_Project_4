@@ -10,7 +10,7 @@ const ProductInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-  const { token ,setShow} = useContext(userContext);
+  const { token ,setShow,setCardId,cardId} = useContext(userContext);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
@@ -66,7 +66,7 @@ const ProductInfo = () => {
           axios
             .post(
               "http://localhost:5000/card/",
-              { product: itemInfo._id, quantity },
+              { product: itemInfo._id, quantity ,ordered :false },
               {
                 headers: {
                   authorization: `Bearer ${token}`,
@@ -75,7 +75,8 @@ const ProductInfo = () => {
             )
             .then((respones) => {
               console.log(respones.data);
-
+              setCardId([...cardId , respones.data.card._id])
+              localStorage.setItem("cardId",respones.data.card._id)
               token ? navigate(`/card`) : navigate("/users/login");
             })
             .catch((err) => {

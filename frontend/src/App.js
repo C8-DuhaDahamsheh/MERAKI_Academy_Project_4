@@ -13,6 +13,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Order from "./components/Order";
 export const userContext = createContext();
 function App() {
+  const navigate = useNavigate()
   const tok = localStorage.getItem("token");
   const usrId = localStorage.getItem("userId");
   const ordrId = localStorage.getItem("orderId")
@@ -26,7 +27,7 @@ function App() {
 const[cardId , setCardId]=useState([])
 const [orderId , setOrderId]=useState(ordrId||"")
 const [ordered , setOrdered] = useState(false)
-
+const [search  ,setSearch]=useState([])
   return (
     <div className="App">
       <h1>Hello, World!</h1>
@@ -72,7 +73,29 @@ const [ordered , setOrdered] = useState(false)
         </Carousel>
         　　　
       </section> */}
-      
+      <input type="Search"
+               id="test"
+               placeholder="Type to search.." onChange={()=>{
+        
+        axios.get("http://localhost:5000/product/").then((response)=>{
+          console.log(response.data.product);
+          setSearch(response.data.product)
+        }).catch((err)=>{
+          console.log(err);
+        })
+      }}/>
+      {search ? <div>{search.map((name , i)=>{
+        return <div key={i}><p onClick={()=>{
+          navigate(`/productInfo/${name._id}`)
+        }}>{name.name}</p></div>
+      })}</div> :<></>}
+      <button  onClick={()=>{
+        axios.get("http://localhost:5000/product/").then((response)=>{
+          console.log(response);
+        }).catch((err)=>{
+          console.log(err);
+        })
+      }}>Search</button>
       <NavBar />
 
       <userContext.Provider

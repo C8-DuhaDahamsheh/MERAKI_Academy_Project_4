@@ -9,6 +9,7 @@ const Card = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAdress] = useState("");
 const [success , setSuccess]=useState("")
+const [deleteCard , setDeleteCard]=useState([])
   useEffect(() => {
     axios
       .get("http://localhost:5000/card", {
@@ -120,16 +121,20 @@ const [success , setSuccess]=useState("")
       <h4>{success}</h4>
       <button onClick={()=>{
         console.log(cardId);
-      axios.put(`http://localhost:5000/card/${cardId}`,{ordered:true},{
+      axios.delete(`http://localhost:5000/card/user/${userId}`,{
         headers: {
           authorization: `Bearer ${token}`,
         },
       }).then((response)=>{
-        console.log(response.data);
+        setItem(item.filter((card)=>{
+        console.log(item);
+
+          return item._id !== cardId
+        }))
       }).catch((err)=>{
         console.log(err);
       })
-        // navigate("/order")
+        navigate("/order")
       }}>Order It?</button>
     </div>
   );
