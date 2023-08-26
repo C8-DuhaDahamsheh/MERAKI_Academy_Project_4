@@ -5,8 +5,16 @@ import Loader from "react-js-loader";
 import axios from "axios";
 
 const Product = () => {
-  const { setInfo, token, setProductId, productId, userId ,setShow ,setCardId,cardId } =
-    useContext(userContext);
+  const {
+    setInfo,
+    token,
+    setProductId,
+    productId,
+    userId,
+    setShow,
+    setCardId,
+    cardId,
+  } = useContext(userContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
@@ -68,12 +76,17 @@ const Product = () => {
             /> */}
             <button
               onClick={() => {
-                
-
+                {
+                  token ? (
+                    <h4>add to bag successfully</h4>
+                  ) : (
+                    navigate("/users/login")
+                  );
+                }
                 axios
                   .post(
                     "http://localhost:5000/card/",
-                    { product: produc._id, quantity ,ordered :false },
+                    { product: produc._id, quantity, isOrderd: false },
                     {
                       headers: {
                         authorization: `Bearer ${token}`,
@@ -81,15 +94,9 @@ const Product = () => {
                     }
                   )
                   .then((respones) => {
-                    setCardId([...cardId , respones.data.card._id])
-                    localStorage.setItem("cardId",respones.data.card._id)
+                    setCardId([...cardId, respones.data.card._id]);
+                    localStorage.setItem("cardId", respones.data.card._id);
                     console.log(respones.data.card._id);
-
-                    token ? (
-                      <h1>successfully Add To Bag</h1>
-                    ) : (
-                      navigate("/users/login")
-                    );
                   })
                   .catch((err) => {
                     console.log(err);

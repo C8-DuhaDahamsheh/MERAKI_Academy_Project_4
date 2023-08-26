@@ -4,8 +4,9 @@ import { userContext } from "../../App";
 const Order = () => {
   const [order, setOrder] = useState([]);
   const [card, setCard] = useState([]);
-const [users , setUsers]=useState("")
-  const { orderId } = useContext(userContext);
+  const [users, setUsers] = useState("");
+  const { orderId, userId } = useContext(userContext);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/order/${orderId}`)
@@ -13,7 +14,7 @@ const [users , setUsers]=useState("")
         console.log(response.data);
         setCard(response.data.order.card);
         setOrder(response.data.order);
-        setUsers(response.data.order.user)
+        setUsers(response.data.order.user);
       })
       .catch((err) => {
         console.log(err);
@@ -27,15 +28,13 @@ const [users , setUsers]=useState("")
       <h4>Your Phone Number :</h4>
       <h4>{order.phoneNumber}</h4>
       <h4>Costumer Name :</h4>
-      <h4>{users.fname} {users.lname}</h4>
+      <h4>
+        {users.fname} {users.lname}
+      </h4>
       <h4>{users.email}</h4>
       <h4>{users.country}</h4>
-      
-      
-      
 
       {card.map((product, i) => {
-       
         return (
           <div key={i}>
             <h4>{product.product.name}</h4>
@@ -43,7 +42,38 @@ const [users , setUsers]=useState("")
           </div>
         );
       })}
-
+      <button
+        onClick={() => {
+          axios
+            .put(`http://localhost:5000/order/${orderId}`, {
+              chekedOut: "Cheked Out",
+            })
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      >
+        ChekedOut?
+      </button>
+      <button
+        onClick={() => {
+          axios
+            .get(`http://localhost:5000/order/${userId}/user`, {
+              chekedOut: "Cheked Out",
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      >
+        See Previous Order ?
+      </button>
     </div>
   );
 };

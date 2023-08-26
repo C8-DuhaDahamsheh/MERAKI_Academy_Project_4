@@ -75,9 +75,9 @@ const [search  ,setSearch]=useState([])
       </section> */}
       <input type="Search"
                id="test"
-               placeholder="Type to search.." onChange={()=>{
+               placeholder="Type to search.." onChange={(e)=>{
         
-        axios.get("http://localhost:5000/product/").then((response)=>{
+        axios.get(`http://localhost:5000/product?name=${e.target.value}`).then((response)=>{
           console.log(response.data.product);
           setSearch(response.data.product)
         }).catch((err)=>{

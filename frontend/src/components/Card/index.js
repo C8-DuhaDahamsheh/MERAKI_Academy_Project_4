@@ -120,17 +120,18 @@ const [deleteCard , setDeleteCard]=useState([])
       </button>
       <h4>{success}</h4>
       <button onClick={()=>{
-        console.log(cardId);
-      axios.delete(`http://localhost:5000/card/user/${userId}`,{
+        
+      axios.put(`http://localhost:5000/card/${userId}/user`,{isOrderd:true},{
         headers: {
           authorization: `Bearer ${token}`,
         },
       }).then((response)=>{
-        setItem(item.filter((card)=>{
-        console.log(item);
-
-          return item._id !== cardId
-        }))
+       console.log(response);
+//         const result = item.filter((card)=>{
+//   console.log(card);
+//   return card.isOrderd === "true"
+// })
+// setItem(result)
       }).catch((err)=>{
         console.log(err);
       })
