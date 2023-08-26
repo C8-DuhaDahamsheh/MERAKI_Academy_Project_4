@@ -5,7 +5,7 @@ const cardSchema = new mongoose.Schema({
     product:{type:mongoose.Schema.Types.ObjectId ,ref:"Product"},
     user : {type:mongoose.Schema.Types.ObjectId , ref :"User"} ,
     quantity: {type : Number},
-    
+    isOrderd :{type:String}
 
 })
 

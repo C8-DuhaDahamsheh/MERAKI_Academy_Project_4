@@ -3,9 +3,9 @@ const cardModel = require("../models/card");
 
 const addCard = async (req, res) => {
   try {
-    const { product, quantity } = req.body;
+    const { product, quantity ,isOrderd } = req.body;
     const user = req.token.userId
-    const newCard = new cardModel({ product, user, quantity  });
+    const newCard = new cardModel({ product, user, quantity ,isOrderd  });
     const card = await newCard.save();
     res
       .status(201)
@@ -17,7 +17,7 @@ const addCard = async (req, res) => {
 
 const getAllCard = (req, res) => {
   cardModel
-    .find().populate("product")
+    .find({isOrderd:false}).populate("product")
     .then((card) => {
       res.status(200).json({ success: true, message: "all the card", card });
     })
@@ -57,7 +57,7 @@ const updatByUserId = (req, res) => {
   const userId = req.params.id;
 
   cardModel
-    .findOneAndUpdate({ user: userId }, req.body, { new: true })
+    .updateMany({ user: userId }, req.body, { new: true })
     .then((newCard) => {
       console.log(newCard);
       if (!newCard) {
@@ -153,7 +153,6 @@ const deletAllCard =(req,res)=>{
     console.log(err);
   })
 }
-
 
 
 module.exports = {

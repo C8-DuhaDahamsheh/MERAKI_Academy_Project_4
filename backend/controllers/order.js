@@ -4,7 +4,7 @@ const orderModel = require("../models/order");
 const creatOrder = (req, res) => {
   const { user, card, phoneNumber, address } = req.body;
 
-  const newOrder = new orderModel({ user, card, phoneNumber, address ,chekedOut :"Not Cheked Out "});
+  const newOrder = new orderModel({ user, card, phoneNumber, address ,chekedOut :"Not Cheked Out"});
 
   newOrder
     .save()
@@ -120,4 +120,29 @@ const deleteOrderById = (req, res) => {
     });
 };
 
-module.exports = { creatOrder, getOrderById, updatOrderById, deleteOrderById };
+const getAllOrder =(req ,res)=>{
+  const id =req.params.id
+  orderModel.find({id ,chekedOut :"Cheked Out"}).then((order)=>{
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: `The order with id => ${id} not found`,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: `The order ${id} `,
+      order,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+      err: err.message,
+    });
+    
+  })
+}
+
+module.exports = { creatOrder, getOrderById, updatOrderById, deleteOrderById  ,getAllOrder};

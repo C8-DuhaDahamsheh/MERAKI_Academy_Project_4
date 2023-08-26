@@ -58,9 +58,9 @@ const getByCategoryId = (req, res) => {
 
 
 const getProductByName = (req,res)=>{
- 
+ const search = req.query.name
 
-  productModel.find({name:{ $regex: "([abc])"}}).then((product)=>{
+  productModel.find({name:{ $regex: search}}).then((product)=>{
     console.log(product);
     if (!product) {
       return res.status(404).json({
