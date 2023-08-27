@@ -27,11 +27,10 @@ function App() {
 const[cardId , setCardId]=useState([])
 const [orderId , setOrderId]=useState(ordrId||"")
 const [ordered , setOrdered] = useState(false)
-const [search  ,setSearch]=useState([])
   return (
     <div className="App">
-      <h1>Hello, World!</h1>
-      {/* <section className="slider container mb-3">
+      <NavBar />
+      <section className="slider container mb-3">
         　　　
         <Carousel>
           　　　
@@ -72,31 +71,9 @@ const [search  ,setSearch]=useState([])
           　　　
         </Carousel>
         　　　
-      </section> */}
-      <input type="Search"
-               id="test"
-               placeholder="Type to search.." onChange={(e)=>{
-        
-        axios.get(`http://localhost:5000/product?name=${e.target.value}`).then((response)=>{
-          console.log(response.data.product);
-          setSearch(response.data.product)
-        }).catch((err)=>{
-          console.log(err);
-        })
-      }}/>
-      {search ? <div>{search.map((name , i)=>{
-        return <div key={i}><p onClick={()=>{
-          navigate(`/productInfo/${name._id}`)
-        }}>{name.name}</p></div>
-      })}</div> :<></>}
-      <button  onClick={()=>{
-        axios.get("http://localhost:5000/product/").then((response)=>{
-          console.log(response);
-        }).catch((err)=>{
-          console.log(err);
-        })
-      }}>Search</button>
-      <NavBar />
+      </section>
+     
+      
 
       <userContext.Provider
         value={{

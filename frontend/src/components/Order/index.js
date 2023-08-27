@@ -11,9 +11,9 @@ const Order = () => {
     axios
       .get(`http://localhost:5000/order/${orderId}`)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.order);
         setCard(response.data.order.card);
-        setOrder(response.data.order);
+        setOrder([...order,response.data.order]);
         setUsers(response.data.order.user);
       })
       .catch((err) => {
