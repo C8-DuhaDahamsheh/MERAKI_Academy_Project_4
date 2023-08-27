@@ -7,10 +7,12 @@ import axios from "axios";
 const ProductInfo = () => {
   const [itemInfo, setItemInfo] = useState(null);
   const [quantity, setQuantity] = useState("");
+
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-  const { token ,setShow,setCardId,cardId} = useContext(userContext);
+  const { token, setShow, setCardId, cardId, color, setColor, size, setSize } =
+    useContext(userContext);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
@@ -21,7 +23,7 @@ const ProductInfo = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   if (!itemInfo) {
     return (
@@ -41,18 +43,34 @@ const ProductInfo = () => {
     <div>
       <img src={itemInfo.image} width="200" height="200" />
       <h3>{itemInfo.name}</h3>
-      <h3>Price :{itemInfo.price}</h3>
+      <h3>Price :{itemInfo.price} JD</h3>
       <h3>Product Detail :</h3>
       <h3>{itemInfo.discreption}</h3>
       <h3>Size :</h3>
       {itemInfo.size.map((siz, i) => {
-        return <button key={i}>{siz}</button>;
+        return (
+          <input
+            key={i}
+            value={siz}
+            onClick={() => {
+              setSize(siz);
+            }}
+          />
+        );
       })}
       <h3>Color :</h3>
       {itemInfo.color.map((colr, i) => {
-        return <button key={i}>{colr}</button>;
+        return (
+          <input
+            key={i}
+            value={colr}
+            onClick={() => {
+              setColor(colr);
+            }}
+          />
+        );
       })}
-      <br/>
+      <br />
       <input
         type="number"
         placeholder="Quantity"
@@ -63,10 +81,13 @@ const ProductInfo = () => {
       <br />
       <button
         onClick={() => {
+          console.log(color);
+          console.log(size);
+
           axios
             .post(
               "http://localhost:5000/card/",
-              { product: itemInfo._id, quantity ,ordered :false },
+              { product: itemInfo._id, quantity, isOrderd: false, color, size },
               {
                 headers: {
                   authorization: `Bearer ${token}`,
@@ -75,9 +96,10 @@ const ProductInfo = () => {
             )
             .then((respones) => {
               console.log(respones.data);
-              setCardId([...cardId , respones.data.card._id])
-              localStorage.setItem("cardId",respones.data.card._id)
+              setCardId([...cardId, respones.data.card._id]);
+              localStorage.setItem("cardId", respones.data.card._id);
               token ? navigate(`/card`) : navigate("/users/login");
+              
             })
             .catch((err) => {
               console.log(err);

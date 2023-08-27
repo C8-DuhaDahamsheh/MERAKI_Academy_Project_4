@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 const Card = () => {
-  const { token ,setShow ,setCardId ,cardId ,userId ,setOrderId ,ordered,setOrdered}  = useContext(userContext);
+  const { token,cardId ,userId ,setOrderId ,total, setTotal }  = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,7 +18,7 @@ const [deleteCard , setDeleteCard]=useState([])
         },
       })
       .then((response) => {
-        console.log(response.data.card);
+        // console.log(response.data.card);
         
         setItem(response.data.card);
       })
@@ -26,16 +26,20 @@ const [deleteCard , setDeleteCard]=useState([])
         console.log(err);
       });
   }, []);
+console.log(item);
 
+  
   if (!item) {
     return <h1>loding</h1>;
   }
+
+ 
   return (
     <div>
-      
+      <h4>Total Cost :</h4>
       {item.map((store, i) => {
 
-       
+    
         
         return (
           <div key={i}>
@@ -54,7 +58,10 @@ const [deleteCard , setDeleteCard]=useState([])
             >
               {store.product.name}
             </h3>
-            <h3>Price :{store.product.price}</h3>
+            <h3>Price :{store.product.price} JD</h3>
+            <h3>color : {store.color}</h3>
+            <h3>size : {store.size}</h3>
+
             <button
               onClick={() => {
                 axios

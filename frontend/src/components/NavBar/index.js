@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -12,13 +12,19 @@ import {
   MDBCollapse,
   MDBIcon,
   MDBBtn,
-  MDBInputGroup
+  MDBInputGroup,
 } from "mdb-react-ui-kit";
 import { IconName } from "react-icons/di";
 const NavBar = () => {
   const [showNav, setShowNav] = useState(false);
-const [search  ,setSearch]=useState([])
-const navigate =useNavigate()
+  const [search, setSearch] = useState([]);
+  const navigate = useNavigate();
+  const [input, setInput] = useState("");
+  
+useEffect(()=>{
+  
+},[])
+
   return (
     <div>
       <MDBNavbar expand="lg" light bgColor="light">
@@ -60,7 +66,7 @@ const navigate =useNavigate()
               </MDBNavbarItem>
             </MDBNavbarNav>
           </MDBCollapse>
-          <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
+          {/* <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
           <input className='form-control' placeholder="Type query" aria-label="Search" type='Search' onChange={(e)=>{
         
         axios.get(`http://localhost:5000/product?name=${e.target.value}`).then((response)=>{
@@ -74,14 +80,14 @@ const navigate =useNavigate()
         }).catch((err)=>{
           console.log(err);
         })
-      }}/>
-      {/* {search ? <div>{search.map((name , i)=>{
+      }}/> */}
+          {/* {search ? <div>{search.map((name , i)=>{
         return <div key={i}><p onClick={()=>{
           navigate(`/productInfo/${name._id}`)
         }}>{name.name}</p></div>
       })}</div> :<></>} */}
-          <MDBBtn outline>Search</MDBBtn>
-        </MDBInputGroup>
+          {/* <MDBBtn outline>Search</MDBBtn>
+        </MDBInputGroup> */}
         </MDBContainer>
       </MDBNavbar>
       {/* <Link to="/category">Home</Link>
@@ -92,29 +98,50 @@ const navigate =useNavigate()
       <br />
       <Link to="/card">Card</Link> */}
 
-{/* <input type="Search"
-               id="test"
-               placeholder="Type to search.." onChange={(e)=>{
-        
-        axios.get(`http://localhost:5000/product?name=${e.target.value}`).then((response)=>{
-          console.log(response.data.product);
-          setSearch(response.data.product)
-        }).catch((err)=>{
-          console.log(err);
-        })
-      }}/>
-      {search ? <div>{search.map((name , i)=>{
-        return <div key={i}><p onClick={()=>{
-          navigate(`/productInfo/${name._id}`)
-        }}>{name.name}</p></div>
-      })}</div> :<></>}
-      <button  onClick={()=>{
-        axios.get("http://localhost:5000/product/").then((response)=>{
-          console.log(response);
-        }).catch((err)=>{
-          console.log(err);
-        })
-      }}>Search</button> */}
+      <input
+        type="Search"
+        id="test"
+        placeholder="Type to search.."
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+
+      <button
+        onClick={() => {
+          axios
+            .get(`http://localhost:5000/product?name=${input}`)
+            .then((response) => {
+              setSearch(response.data.product);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      >
+        Search
+      </button>
+      
+      {input ? (
+        <div>
+          {search.map((name, i) => {
+            return (
+              <div key={i}>
+                <p
+                  onClick={() => {
+                    navigate(`/productInfo/${name._id}`);
+                  }}
+                >
+                  {name.name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      ) : 
+      null
+      }
+      
     </div>
   );
 };

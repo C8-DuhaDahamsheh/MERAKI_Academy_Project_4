@@ -13,20 +13,23 @@ import Carousel from "react-bootstrap/Carousel";
 import Order from "./components/Order";
 export const userContext = createContext();
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const tok = localStorage.getItem("token");
   const usrId = localStorage.getItem("userId");
-  const ordrId = localStorage.getItem("orderId")
-  const crdId = localStorage.getItem("cardId")
+  const ordrId = localStorage.getItem("orderId");
+  const crdId = localStorage.getItem("cardId");
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
   const [productId, setProductId] = useState("");
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState(usrId || "");
-const[cardId , setCardId]=useState([])
-const [orderId , setOrderId]=useState(ordrId||"")
-const [ordered , setOrdered] = useState(false)
+  const [cardId, setCardId] = useState([]);
+  const [orderId, setOrderId] = useState(ordrId || "");
+  const [ordered, setOrdered] = useState(false);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const [total, setTotal] = useState(0.0);
   return (
     <div className="App">
       <NavBar />
@@ -37,7 +40,8 @@ const [ordered , setOrdered] = useState(false)
           <Carousel.Item className="slide">
             　　　
             <img
-              className="d-block w-100" width="200"
+              className="d-block w-100"
+              width="200"
               height="300"
               src="https://shopping.cmayds.com/themes/electro/image_hub/slider/shopping_slider_1.jpg"
               alt="First slide"
@@ -60,8 +64,8 @@ const [ordered , setOrdered] = useState(false)
           <Carousel.Item className="slide">
             　　
             <img
-            width="200"
-            height="300"
+              width="200"
+              height="300"
               className="d-block w-100"
               src="https://media.slidesgo.com/storage/34245341/responsive-images/0-shopping-center-infographics___media_library_original_1600_900.jpg"
               alt="Third slide"
@@ -72,8 +76,6 @@ const [ordered , setOrdered] = useState(false)
         </Carousel>
         　　　
       </section>
-     
-      
 
       <userContext.Provider
         value={{
@@ -91,9 +93,15 @@ const [ordered , setOrdered] = useState(false)
           cardId,
           setCardId,
           orderId,
-          setOrderId ,
+          setOrderId,
           ordered,
-          setOrdered
+          setOrdered,
+          color,
+          setColor,
+          size,
+          setSize,
+          total,
+          setTotal,
         }}
       >
         <Routes>
@@ -104,7 +112,7 @@ const [ordered , setOrdered] = useState(false)
           <Route path="/users/register" element={<Register />} />
           <Route path="/users/login" element={<Login />} />
           <Route path="/card" element={<Card />} />
-          <Route path="/order" element={<Order/>}/>
+          <Route path="/order" element={<Order />} />
         </Routes>
       </userContext.Provider>
     </div>

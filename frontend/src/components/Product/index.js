@@ -14,6 +14,8 @@ const Product = () => {
     setShow,
     setCardId,
     cardId,
+    size ,
+    color
   } = useContext(userContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ const Product = () => {
             >
               {produc.name}
             </h3>
-            <h3>{produc.price}</h3>
+            <h3>{produc.price} JD</h3>
             {/* <input
               type="number"
               placeholder="Quantity"
@@ -76,17 +78,17 @@ const Product = () => {
             /> */}
             <button
               onClick={() => {
-                {
-                  token ? (
-                    <h4>add to bag successfully</h4>
-                  ) : (
-                    navigate("/users/login")
-                  );
-                }
+                // {
+                //   token ? (
+                //     <h4>add to bag successfully</h4>
+                //   ) : (
+                //     navigate("/users/login")
+                //   );
+                // }
                 axios
                   .post(
                     "http://localhost:5000/card/",
-                    { product: produc._id, quantity, isOrderd: false },
+                    { product: produc._id, quantity, isOrderd: false ,color ,size },
                     {
                       headers: {
                         authorization: `Bearer ${token}`,
@@ -97,6 +99,7 @@ const Product = () => {
                     setCardId([...cardId, respones.data.card._id]);
                     localStorage.setItem("cardId", respones.data.card._id);
                     console.log(respones.data.card._id);
+                    token ? navigate(`/card`) : navigate("/users/login");
                   })
                   .catch((err) => {
                     console.log(err);
