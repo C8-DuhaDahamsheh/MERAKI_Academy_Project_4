@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../NavBar/style.css"
 import {
   MDBContainer,
   MDBNavbar,
@@ -16,7 +17,9 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBCollapse,
+  MDBCol, MDBFormInline
 } from "mdb-react-ui-kit";
+
 import { IconName } from "react-icons/di";
 const NavBar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -69,8 +72,12 @@ const NavBar = () => {
               <MDBNavbarItem>
                 <MDBNavbarLink href="/order">Order</MDBNavbarLink>
               </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/contactUs">ContactUs</MDBNavbarLink>
+              </MDBNavbarItem>
             </MDBNavbarNav>
-
+            
+            <div className="search">
             <form className="d-flex input-group w-auto">
               <input
                 type="search"
@@ -78,13 +85,15 @@ const NavBar = () => {
                 placeholder="Type to search.."
                 aria-label="Search"
                 onChange={(e) => {
+                  e.preventDefault()
                   setInput(e.target.value);
                 }}
               />
 
-              <MDBBtn
-                color="primary"
-                onClick={() => {
+              <MDBBtn 
+                outline rounded className='mx-2' color='danger'
+                onClick={(e) => {
+                  e.preventDefault()
                   axios
                     .get(`http://localhost:5000/product?name=${input}`)
                     .then((response) => {
@@ -97,27 +106,53 @@ const NavBar = () => {
               >
                 Search
               </MDBBtn>
-              {input ? (
-                <div>
-                  {search.map((name, i) => {
-                    return (
-                      <div key={i}>
-                        <p
-                          onClick={() => {
-                            navigate(`/productInfo/${name._id}`);
-                          }}
-                        >
-                          {name.name}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
+              
             </form>
+            {input ? (
+       <div className="input">
+         {search.map((name, i) => {
+           return (
+             <div key={i}>
+               <p
+                 onClick={() => {
+                   navigate(`/productInfo/${name._id}`);
+                 }}
+               >
+                 {name.name}
+               </p>
+             </div>
+           );
+         })}
+       </div>
+     ) : 
+     null
+     }
+            </div>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
+
+     
+      
+      {/* {input ? (
+       <div className="input">
+         {search.map((name, i) => {
+           return (
+             <div key={i}>
+               <p
+                 onClick={() => {
+                   navigate(`/productInfo/${name._id}`);
+                 }}
+               >
+                 {name.name}
+               </p>
+             </div>
+           );
+         })}
+       </div>
+     ) : 
+     null
+     } */}
       {/* <Link to="/category">Home</Link>
       <br />
       <Link to="/users/login">Login</Link>
@@ -133,9 +168,9 @@ const NavBar = () => {
         onChange={(e) => {
           setInput(e.target.value);
         }}
-      /> */}
+      />
 
-      {/* <button
+      <button
         onClick={() => {
           axios
             .get(`http://localhost:5000/product?name=${input}`)
@@ -148,27 +183,8 @@ const NavBar = () => {
         }}
       >
         Search
-      </button> */}
-
-      {/* {input ? (
-        <div>
-          {search.map((name, i) => {
-            return (
-              <div key={i}>
-                <p
-                  onClick={() => {
-                    navigate(`/productInfo/${name._id}`);
-                  }}
-                >
-                  {name.name}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      ) : 
-      null
-      } */}
+      </button>  */}
+      
     </div>
   );
 };

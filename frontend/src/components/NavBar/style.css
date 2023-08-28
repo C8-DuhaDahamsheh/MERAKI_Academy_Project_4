@@ -1,0 +1,14 @@
+
+.search{
+    position: relative;
+}
+
+
+.input{
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    top: 40px;
+    z-index: 2;
+    border: 3px solid rgba(202, 202, 243, 0.507);
+    box-shadow: 10px;
+}

@@ -40,12 +40,14 @@ const ProductInfo = () => {
     );
   }
   return (
+    <div>
     <div className="productInfo">
-      <img src={itemInfo.image} width="200" height="200" />
+      <img src={itemInfo.image} width="350" height="350" />
+      <div className="info">
       <h3>{itemInfo.name}</h3>
       <h3>Price :{itemInfo.price} JD</h3>
       <h3>Product Detail :</h3>
-      <h3>{itemInfo.discreption}</h3>
+      <h3 >{itemInfo.discreption}</h3>
       <h3>Size :</h3>
       {itemInfo.size.map((siz, i) => {
         return (
@@ -78,6 +80,8 @@ const ProductInfo = () => {
           setQuantity(e.target.value);
         }}
       />
+      </div>
+      </div>
       <br />
       <button
         onClick={() => {
@@ -138,6 +142,7 @@ const ProductInfo = () => {
       >
         ADD TO FAVORIT
       </button>
+    
     </div>
   );
 };

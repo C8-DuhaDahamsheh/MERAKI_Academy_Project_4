@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Card from "./components/Card";
 import Order from "./components/Order";
 import Favorit from "./components/Favorit";
+import ContactUs from "./components/ContactUs";
 export const userContext = createContext();
 function App() {
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ function App() {
           <Route path="/card" element={<Card />} />
           <Route path="/favorit" element={<Favorit/>}/>
           <Route path="/order" element={<Order />} />
+          <Route path="/contactUs" element={<ContactUs/>}/>
         </Routes>
       </userContext.Provider>
     </div>
