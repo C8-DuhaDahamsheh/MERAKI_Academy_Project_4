@@ -100,7 +100,7 @@ const Category = () => {
               {collction.name}
             </h2>
 
-            <img
+            <img className="imag"
               src={collction.imag}
               width="200"
               height="200"

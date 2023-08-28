@@ -1,0 +1,20 @@
+
+.product {
+    margin: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+
+
+.imgForProduct{
+    border-radius: 5%;
+    border: 3px solid black;
+}
+
+.nameOfProduct{
+    font-size: 18px;
+}
+
+.priceOfProduct{
+    font-size: 18px;
+}

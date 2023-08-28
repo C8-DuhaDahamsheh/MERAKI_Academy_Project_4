@@ -8,9 +8,8 @@ import ProductInfo from "./components/ProductInfo";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Card from "./components/Card";
-import axios from "axios";
-import Carousel from "react-bootstrap/Carousel";
 import Order from "./components/Order";
+import Favorit from "./components/Favorit";
 export const userContext = createContext();
 function App() {
   const navigate = useNavigate();
@@ -34,50 +33,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* <section className="slider container mb-3">
-        　　　
-        <Carousel>
-          　　　
-          <Carousel.Item className="slide">
-            　　　
-            <img
-              className="d-block w-100"
-              width="200"
-              height="300"
-              src="https://shopping.cmayds.com/themes/electro/image_hub/slider/shopping_slider_1.jpg"
-              alt="First slide"
-            />
-            　　　
-          </Carousel.Item>
-          　　　
-          <Carousel.Item className="slide">
-            　　　
-            <img
-              className="d-block w-100"
-              width="200"
-              height="300"
-              src="https://media.slidesgo.com/storage/75565/responsive-images/0-shopping-mall___media_library_original_1600_900.jpg"
-              alt="Second slide"
-            />
-            　　　
-          </Carousel.Item>
-          　　　
-          <Carousel.Item className="slide">
-            　　
-            <img
-              width="200"
-              height="300"
-              className="d-block w-100"
-              src="https://media.slidesgo.com/storage/34245341/responsive-images/0-shopping-center-infographics___media_library_original_1600_900.jpg"
-              alt="Third slide"
-            />
-            　　　
-          </Carousel.Item>
-          　　　
-        </Carousel>
-        　　　
-      </section> */}
-
+      
       <userContext.Provider
         value={{
           info,
@@ -113,6 +69,7 @@ function App() {
           <Route path="/users/register" element={<Register />} />
           <Route path="/users/login" element={<Login />} />
           <Route path="/card" element={<Card />} />
+          <Route path="/favorit" element={<Favorit/>}/>
           <Route path="/order" element={<Order />} />
         </Routes>
       </userContext.Provider>

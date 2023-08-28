@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
 import Loader from "react-js-loader";
 import axios from "axios";
-
+import "../ProductInfo/style.css"
 const ProductInfo = () => {
   const [itemInfo, setItemInfo] = useState(null);
   const [quantity, setQuantity] = useState("");
@@ -27,8 +27,8 @@ const ProductInfo = () => {
 
   if (!itemInfo) {
     return (
-      <div className={"item"}>
-        {setShow(false)}
+      <div className="item">
+       
         <Loader
           type="bubble-loop"
           bgColor={"pink"}
@@ -40,7 +40,7 @@ const ProductInfo = () => {
     );
   }
   return (
-    <div>
+    <div className="productInfo">
       <img src={itemInfo.image} width="200" height="200" />
       <h3>{itemInfo.name}</h3>
       <h3>Price :{itemInfo.price} JD</h3>
@@ -83,7 +83,6 @@ const ProductInfo = () => {
         onClick={() => {
           console.log(color);
           console.log(size);
-
           axios
             .post(
               "http://localhost:5000/card/",
@@ -98,15 +97,46 @@ const ProductInfo = () => {
               console.log(respones.data);
               setCardId([...cardId, respones.data.card._id]);
               localStorage.setItem("cardId", respones.data.card._id);
-              token ? navigate(`/card`) : navigate("/users/login");
+             {token ? navigate(`/card`) : navigate("/users/login");} 
               
             })
             .catch((err) => {
               console.log(err);
+          
+
             });
         }}
       >
         ADD TO BAG
+      </button>
+      <button
+        onClick={() => {
+         
+          axios
+            .post(
+              "http://localhost:5000/card/",
+              { product: itemInfo._id, quantity, isOrderd: false, color, size },
+              {
+                headers: {
+                  authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((respones) => {
+              console.log(respones.data);
+              setCardId([...cardId, respones.data.card._id]);
+              localStorage.setItem("cardId", respones.data.card._id);
+             {token ? navigate(`/favorit`) : navigate("/users/login");} 
+              
+            })
+            .catch((err) => {
+              console.log(err);
+          
+
+            });
+        }}
+      >
+        ADD TO FAVORIT
       </button>
     </div>
   );

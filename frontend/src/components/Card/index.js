@@ -9,7 +9,7 @@ const Card = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAdress] = useState("");
 const [success , setSuccess]=useState("")
-const [deleteCard , setDeleteCard]=useState([])
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/card", {

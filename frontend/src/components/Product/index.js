@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userContext } from "../../App";
 import Loader from "react-js-loader";
 import axios from "axios";
-
+import "../Product/style.css"
 const Product = () => {
   const {
     setInfo,
@@ -46,12 +46,12 @@ const Product = () => {
   }
 
   return (
-    <div>
-      {setShow(false)}
+    <div className="product">
+      
       {item.map((produc, i) => {
         return (
-          <div key={i}>
-            <img
+          <div key={i} className="item">
+            <img className="imgForProduct"
               src={produc.image}
               width="200"
               height="200"
@@ -60,7 +60,7 @@ const Product = () => {
                 navigate(`/productInfo/${produc._id}`);
               }}
             />
-            <h3
+            <h3  className="nameOfProduct"
               onClick={() => {
                 setInfo(produc._id);
                 navigate(`/productInfo/${produc._id}`);
@@ -68,7 +68,7 @@ const Product = () => {
             >
               {produc.name}
             </h3>
-            <h3>{produc.price} JD</h3>
+            <h3 className="priceOfProduct">{produc.price} JD</h3>
             {/* <input
               type="number"
               placeholder="Quantity"
@@ -99,14 +99,14 @@ const Product = () => {
                     setCardId([...cardId, respones.data.card._id]);
                     localStorage.setItem("cardId", respones.data.card._id);
                     console.log(respones.data.card._id);
-                    token ? navigate(`/card`) : navigate("/users/login");
+                    token ? navigate(`/favorit`) : navigate("/users/login");
                   })
                   .catch((err) => {
                     console.log(err);
                   });
               }}
             >
-              ADD TO BAG
+              ADD TO Favorit
             </button>
           </div>
         );

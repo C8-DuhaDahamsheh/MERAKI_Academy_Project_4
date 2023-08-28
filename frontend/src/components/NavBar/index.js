@@ -63,6 +63,12 @@ const NavBar = () => {
               <MDBNavbarItem>
                 <MDBNavbarLink href="/card">Card</MDBNavbarLink>
               </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/favorit">Favorit</MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/order">Order</MDBNavbarLink>
+              </MDBNavbarItem>
             </MDBNavbarNav>
 
             <form className="d-flex input-group w-auto">

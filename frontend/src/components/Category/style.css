@@ -1,12 +1,21 @@
 .category{
-    border: 5px solid black;
+    /* border: 5px solid black; */
     margin: 10px;
     
 }
 
 .collection{
-    border: 5px solid blue;
+    /* border: 5px solid blue; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 
+}
+
+.imag {
+    border-radius: 100%;
+    border: 3px solid black;
+}
+
+.imag :hover{
+    color: rgba(32, 65, 65, 0.534);
 }
