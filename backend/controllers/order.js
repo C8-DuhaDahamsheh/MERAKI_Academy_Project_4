@@ -120,9 +120,20 @@ const deleteOrderById = (req, res) => {
     });
 };
 
-const getAllOrder =(req ,res)=>{
+const getOrderByUserId =(req ,res)=>{
   const id =req.params.id
-  orderModel.find({id ,chekedOut :"Cheked Out"}).then((order)=>{
+  orderModel.find({user:id ,chekedOut:"Cheked Out"}).populate({
+    path: 'card',
+    model: "Card",
+    populate: {
+        path: 'product',
+        model: 'Product'
+    }
+}).populate({
+  path: 'user',
+  model: "User"
+ 
+}).then((order)=>{
     if (!order) {
       return res.status(404).json({
         success: false,
@@ -145,4 +156,15 @@ const getAllOrder =(req ,res)=>{
   })
 }
 
-module.exports = { creatOrder, getOrderById, updatOrderById, deleteOrderById  ,getAllOrder};
+
+
+
+
+
+
+
+
+
+
+
+module.exports = { creatOrder, getOrderById, updatOrderById, deleteOrderById  ,getOrderByUserId};
