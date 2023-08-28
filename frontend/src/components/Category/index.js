@@ -5,6 +5,7 @@ import "../Category/style.css";
 import { userContext } from "../../App";
 import Product from "../Product";
 import Loader from "react-js-loader";
+import Carousel from "react-bootstrap/Carousel";
 
 const Category = () => {
   const [categ, setCateg] = useState(null);
@@ -39,7 +40,52 @@ const Category = () => {
   }
 
   return (
+    <div>
+    <section className="slider container mb-3">
+        　　　
+    <Carousel>
+      　　　
+      <Carousel.Item className="slide">
+        　　　
+        <img
+          className="d-block w-100"
+          width="200"
+          height="300"
+          src="https://shopping.cmayds.com/themes/electro/image_hub/slider/shopping_slider_1.jpg"
+          alt="First slide"
+        />
+        　　　
+      </Carousel.Item>
+      　　　
+      <Carousel.Item className="slide">
+        　　　
+        <img
+          className="d-block w-100"
+          width="200"
+          height="300"
+          src="https://media.slidesgo.com/storage/75565/responsive-images/0-shopping-mall___media_library_original_1600_900.jpg"
+          alt="Second slide"
+        />
+        　　　
+      </Carousel.Item>
+      　　　
+      <Carousel.Item className="slide">
+        　　
+        <img
+          width="200"
+          height="300"
+          className="d-block w-100"
+          src="https://media.slidesgo.com/storage/34245341/responsive-images/0-shopping-center-infographics___media_library_original_1600_900.jpg"
+          alt="Third slide"
+        />
+        　　　
+      </Carousel.Item>
+      　　　
+    </Carousel>
+    　　　
+  </section>
     <div className="collection">
+
       {categ.map((collction, i) => {
         return (
           <div key={i} className="category">
@@ -69,6 +115,7 @@ const Category = () => {
           </div>
         );
       })}
+    </div>
     </div>
   );
 };

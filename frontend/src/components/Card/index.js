@@ -27,8 +27,17 @@ const [deleteCard , setDeleteCard]=useState([])
       });
   }, []);
 console.log(item);
+const calculateTotal = (item) => {
+  return item.product.price * item.quantity;
+};
 
-  
+const grandTotal = item.reduce(
+  (total, item) => total + calculateTotal(item),
+  0
+);
+  setTotal(grandTotal)
+  localStorage.setItem("total" , grandTotal)
+console.log(grandTotal);
   if (!item) {
     return <h1>loding</h1>;
   }
@@ -36,7 +45,7 @@ console.log(item);
  
   return (
     <div>
-      <h4>Total Cost :</h4>
+      <h4>Total Cost : {total} JD</h4>
       {item.map((store, i) => {
 
     

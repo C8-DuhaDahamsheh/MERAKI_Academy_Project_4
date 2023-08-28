@@ -18,6 +18,7 @@ function App() {
   const usrId = localStorage.getItem("userId");
   const ordrId = localStorage.getItem("orderId");
   const crdId = localStorage.getItem("cardId");
+  const totalCost =localStorage.getItem("total")
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
@@ -29,11 +30,11 @@ function App() {
   const [ordered, setOrdered] = useState(false);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-  const [total, setTotal] = useState(0.0);
+  const [total, setTotal] = useState(totalCost||0);
   return (
     <div className="App">
       <NavBar />
-      <section className="slider container mb-3">
+      {/* <section className="slider container mb-3">
         　　　
         <Carousel>
           　　　
@@ -75,7 +76,7 @@ function App() {
           　　　
         </Carousel>
         　　　
-      </section>
+      </section> */}
 
       <userContext.Provider
         value={{

@@ -5,7 +5,7 @@ const Order = () => {
   const [order, setOrder] = useState([]);
   const [card, setCard] = useState([]);
   const [users, setUsers] = useState("");
-  const { orderId, userId } = useContext(userContext);
+  const { orderId, userId ,total } = useContext(userContext);
 
   useEffect(() => {
     axios
@@ -13,7 +13,7 @@ const Order = () => {
       .then((response) => {
         console.log(response.data.order);
         setCard(response.data.order.card);
-        setOrder([...order,response.data.order]);
+        setOrder(...order,response.data.order);
         setUsers(response.data.order.user);
       })
       .catch((err) => {
@@ -33,7 +33,7 @@ const Order = () => {
       </h4>
       <h4>{users.email}</h4>
       <h4>{users.country}</h4>
-
+      <h4>{total}</h4>
       {card.map((product, i) => {
         return (
           <div key={i}>

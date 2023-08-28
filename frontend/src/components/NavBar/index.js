@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -6,13 +6,16 @@ import {
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarToggler,
+  MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
   MDBNavbarLink,
-  MDBCollapse,
-  MDBIcon,
   MDBBtn,
-  MDBInputGroup,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBCollapse,
 } from "mdb-react-ui-kit";
 import { IconName } from "react-icons/di";
 const NavBar = () => {
@@ -20,33 +23,36 @@ const NavBar = () => {
   const [search, setSearch] = useState([]);
   const navigate = useNavigate();
   const [input, setInput] = useState("");
-  
-useEffect(()=>{
-  
-},[])
+  const [showBasic, setShowBasic] = useState(false);
 
   return (
     <div>
       <MDBNavbar expand="lg" light bgColor="light">
         <MDBContainer fluid>
-          <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+          <MDBNavbarBrand href="#">
+            <img
+              src="https://dearguest.com/wp-content/uploads/2017/04/branding-750x430.jpg"
+              height="70"
+              alt=""
+              loading="lazy"
+            />
+          </MDBNavbarBrand>
+
           <MDBNavbarToggler
-            type="button"
+            aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            onClick={() => setShowNav(!showNav)}
+            onClick={() => setShowBasic(!showBasic)}
           >
             <MDBIcon icon="bars" fas />
           </MDBNavbarToggler>
-          <MDBCollapse navbar show={showNav}>
-            <MDBNavbarNav>
+
+          <MDBCollapse navbar show={showBasic}>
+            <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
                 <MDBNavbarLink active aria-current="page" href="/category">
                   Home
                 </MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href="/card">Card</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href="/users/login">Login</MDBNavbarLink>
@@ -55,39 +61,55 @@ useEffect(()=>{
                 <MDBNavbarLink href="/users/register">Register</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink
-                  disabled
-                  href="#"
-                  tabIndex={-1}
-                  aria-disabled="true"
-                >
-                  Disabled
-                </MDBNavbarLink>
+                <MDBNavbarLink href="/card">Card</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
+
+            <form className="d-flex input-group w-auto">
+              <input
+                type="search"
+                className="form-control"
+                placeholder="Type to search.."
+                aria-label="Search"
+                onChange={(e) => {
+                  setInput(e.target.value);
+                }}
+              />
+
+              <MDBBtn
+                color="primary"
+                onClick={() => {
+                  axios
+                    .get(`http://localhost:5000/product?name=${input}`)
+                    .then((response) => {
+                      setSearch(response.data.product);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                Search
+              </MDBBtn>
+              {input ? (
+                <div>
+                  {search.map((name, i) => {
+                    return (
+                      <div key={i}>
+                        <p
+                          onClick={() => {
+                            navigate(`/productInfo/${name._id}`);
+                          }}
+                        >
+                          {name.name}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </form>
           </MDBCollapse>
-          {/* <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
-          <input className='form-control' placeholder="Type query" aria-label="Search" type='Search' onChange={(e)=>{
-        
-        axios.get(`http://localhost:5000/product?name=${e.target.value}`).then((response)=>{
-          console.log(response.data.product);
-          setSearch(response.data.product)
-          {search ? <div>{search.map((name , i)=>{
-            return <div key={i}><p onClick={()=>{
-              navigate(`/productInfo/${name._id}`)
-            }}>{name.name}</p></div>
-          })}</div> :<></>}
-        }).catch((err)=>{
-          console.log(err);
-        })
-      }}/> */}
-          {/* {search ? <div>{search.map((name , i)=>{
-        return <div key={i}><p onClick={()=>{
-          navigate(`/productInfo/${name._id}`)
-        }}>{name.name}</p></div>
-      })}</div> :<></>} */}
-          {/* <MDBBtn outline>Search</MDBBtn>
-        </MDBInputGroup> */}
         </MDBContainer>
       </MDBNavbar>
       {/* <Link to="/category">Home</Link>
@@ -98,16 +120,16 @@ useEffect(()=>{
       <br />
       <Link to="/card">Card</Link> */}
 
-      <input
+      {/* <input
         type="Search"
         id="test"
         placeholder="Type to search.."
         onChange={(e) => {
           setInput(e.target.value);
         }}
-      />
+      /> */}
 
-      <button
+      {/* <button
         onClick={() => {
           axios
             .get(`http://localhost:5000/product?name=${input}`)
@@ -120,9 +142,9 @@ useEffect(()=>{
         }}
       >
         Search
-      </button>
-      
-      {input ? (
+      </button> */}
+
+      {/* {input ? (
         <div>
           {search.map((name, i) => {
             return (
@@ -140,8 +162,7 @@ useEffect(()=>{
         </div>
       ) : 
       null
-      }
-      
+      } */}
     </div>
   );
 };
