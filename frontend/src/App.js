@@ -31,10 +31,11 @@ function App() {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [total, setTotal] = useState(totalCost||0);
+
   return (
     <div className="App">
-      <NavBar />
       
+      <NavBar />
       <userContext.Provider
         value={{
           info,

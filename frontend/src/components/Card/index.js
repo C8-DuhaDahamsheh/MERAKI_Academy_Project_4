@@ -35,7 +35,10 @@ const [success , setSuccess]=useState("")
         setItem(response.data.card);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.status);
+        if(err.response.status){
+          return localStorage.removeItem("token");
+        }
       });
   }, []);
 console.log(item);

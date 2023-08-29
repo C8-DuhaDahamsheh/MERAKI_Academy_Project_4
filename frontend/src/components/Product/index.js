@@ -60,79 +60,93 @@ const Product = () => {
 
   return (
     <div className="product">
-      {item.map((produc, i) => {
-        return (
-          <div key={i} className="item">
-            <MDBCard className="card">
-              {/* <MDBRipple
+      <MDBContainer>
+        <MDBRow className="row-cols-3 row-cols-md-3 g-4">
+          {item.map((produc, i) => {
+            return (
+              <div key={i} >
+                <MDBCol size="md" className="h-100">
+                  <MDBCard  className='h-100 w-75'>
+                    {/* <MDBRipple
                 rippleColor="light"
                 rippleTag="div"
                 className="bg-image hover-overlay"
               > */}
-                <MDBCardImage
-                  src={produc.image}
-                  fluid
-                  alt="..."
-                  width="200"
-                  height="250"
-                  onClick={() => {
-                    setInfo(produc._id);
-                    navigate(`/productInfo/${produc._id}`);
-                  }}
-                />
-                <a>
-                  <div
-                    className="mask"
-                    style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                  ></div>
-                </a>
-              {/* </MDBRipple> */}
-              <MDBCardBody>
-                <MDBCardTitle className="title"
-                  onClick={() => {
-                    setInfo(produc._id);
-                    navigate(`/productInfo/${produc._id}`);
-                  }}
-                >
-                  {produc.name}
-                </MDBCardTitle>
-                <MDBCardText className="price">{produc.price} JD</MDBCardText>
-                <MDBBtn noRipple
-                  // href="#"
-                  onClick={() => {
-                    axios
-                      .post(
-                        "http://localhost:5000/card/",
-                        {
-                          product: produc._id,
-                          quantity,
-                          isOrderd: false,
-                          color,
-                          size,
-                        },
-                        {
-                          headers: {
-                            authorization: `Bearer ${token}`,
-                          },
-                        }
-                      )
-                      .then((respones) => {
-                        setCardId([...cardId, respones.data.card._id]);
-                        localStorage.setItem("cardId", respones.data.card._id);
-                        console.log(respones.data.card._id);
-                        token ? navigate(`/favorit`) : navigate("/users/login");
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  }}
-                >
-                  Add To Favorit
-                </MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
+                    <MDBCardImage
+                      src={produc.image}
+                      width="100"
+                      height="200"
+                      position='top'
+                      onClick={() => {
+                        setInfo(produc._id);
+                        navigate(`/productInfo/${produc._id}`);
+                      }}
+                    />
+                    <a>
+                      <div
+                        className="mask"
+                        style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+                      ></div>
+                    </a>
+                    {/* </MDBRipple> */}
+                    <MDBCardBody>
+                      <MDBCardTitle
+                        className="title"
+                        onClick={() => {
+                          setInfo(produc._id);
+                          navigate(`/productInfo/${produc._id}`);
+                        }}
+                      >
+                        {produc.name}
+                      </MDBCardTitle>
+                      <MDBCardText className="price">
+                        {produc.price} JD
+                      </MDBCardText>
+                      <MDBBtn
+                        noRipple
+                        color='success'
+                        onClick={() => {
+                          {
+                            token
+                              ? navigate(`/favorit`)
+                              : navigate("/users/login");
+                          }
 
-            {/* <img className="imgForProduct"
+                          axios
+                            .post(
+                              "http://localhost:5000/card/",
+                              {
+                                product: produc._id,
+                                quantity,
+                                isOrderd: false,
+                                color,
+                                size,
+                              },
+                              {
+                                headers: {
+                                  authorization: `Bearer ${token}`,
+                                },
+                              }
+                            )
+                            .then((respones) => {
+                              setCardId([...cardId, respones.data.card._id]);
+                              localStorage.setItem(
+                                "cardId",
+                                respones.data.card._id
+                              );
+                              console.log(respones.data.card._id);
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                            });
+                        }}
+                      >
+                        Add To Favorit
+                      </MDBBtn>
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
+                {/* <img className="imgForProduct"
               src={produc.image}
               width="200"
               height="200"
@@ -150,14 +164,14 @@ const Product = () => {
               {produc.name}
             </h3>
             <h3 className="priceOfProduct">{produc.price} JD</h3> */}
-            {/* <input
+                {/* <input
               type="number"
               placeholder="Quantity"
               onChange={(e) => {
                 setQuantity(e.target.value);
               }}
             /> */}
-            {/* <button
+                {/* <button
               onClick={() => {
                 // {
                 //   token ? (
@@ -189,9 +203,11 @@ const Product = () => {
             >
               ADD TO Favorit
             </button> */}
-          </div>
-        );
-      })}
+              </div>
+            );
+          })}
+        </MDBRow>
+      </MDBContainer>
     </div>
   );
 };

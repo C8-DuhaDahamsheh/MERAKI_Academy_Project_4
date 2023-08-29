@@ -134,7 +134,7 @@ const Register = () => {
                   />
                 </div>
 
-                <MDBBtn
+                <MDBBtn  noRipple
                   className="mb-4"
                   size="lg"
                   onClick={() => {

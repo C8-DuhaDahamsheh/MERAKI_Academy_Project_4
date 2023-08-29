@@ -18,6 +18,8 @@ const Login = () => {
   const [errMssg, setErrMssg] = useState("");
   const [succMssg, setSuccMssg] = useState("");
   const { setToken, setUserId, setShow } = useContext(userContext);
+
+
 const navigate =useNavigate()
   return (
     <div>
@@ -64,7 +66,7 @@ const navigate =useNavigate()
               <a href="!#">Forgot password?</a>
             </div>
 
-            <MDBBtn
+            <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
               onClick={() => {
@@ -81,6 +83,8 @@ const navigate =useNavigate()
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data.userId);
                     navigate("/category")
+     
+                    
                   })
                   .catch((err) => {
                     console.log(err);
@@ -96,7 +100,7 @@ const navigate =useNavigate()
               <p className="text-center fw-bold mx-3 mb-0">OR</p>
             </div>
 
-            <MDBBtn
+            <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
               style={{ backgroundColor: "#3b5998" }}
@@ -105,7 +109,7 @@ const navigate =useNavigate()
               Continue with facebook
             </MDBBtn>
 
-            <MDBBtn
+            <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
               style={{ backgroundColor: "#55acee" }}
