@@ -64,7 +64,7 @@ const NavBar = () => {
                 <MDBNavbarLink href="/users/register">Register</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/card">Card</MDBNavbarLink>
+                <MDBNavbarLink href="/card">Cart</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href="/favorit">Favorit</MDBNavbarLink>
@@ -90,7 +90,7 @@ const NavBar = () => {
                 }}
               />
 
-              <MDBBtn 
+              <MDBBtn  noRipple
                 outline rounded className='mx-2' color='danger'
                 onClick={(e) => {
                   e.preventDefault()

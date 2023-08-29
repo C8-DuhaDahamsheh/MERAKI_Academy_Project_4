@@ -1,12 +1,28 @@
 
 .product {
-    margin: 40px;
+    margin: 100px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
 }
+ .card {
+    margin: 20px;
+    padding: 20px 20px;
+ }
 
+.title{
+    font-size: 16px;
+}
 
-.imgForProduct{
+.price {
+    font-size: 20px;
+    margin: 20px;
+}
+.item{
+    height: 100%;
+    width: 100%;
+}
+
+/* .imgForProduct{
     border-radius: 5%;
     border: 3px solid black;
 }
@@ -17,4 +33,4 @@
 
 .priceOfProduct{
     font-size: 18px;
-}
+} */
