@@ -88,19 +88,8 @@ const Category = () => {
 
       {categ.map((collction, i) => {
         return (
-          <div key={i} className="category">
-            <h2
-              onClick={() => {
-                {
-                  setCategId(collction._id);
-                }
-                navigate(`/product/${collction._id}`);
-              }}
-            >
-              {collction.name}
-            </h2>
-
-            <img className="imag"
+          <div key={i} className="container">
+            <img className="image"
               src={collction.imag}
               width="200"
               height="200"
@@ -112,6 +101,19 @@ const Category = () => {
                 navigate(`/product/${collction._id}`);
               }}
             />
+           <div className="middle">
+            <h2 className="text"
+              onClick={() => {
+                {
+                  setCategId(collction._id);
+                }
+                navigate(`/product/${collction._id}`);
+              }}
+            >
+              {collction.name}
+            </h2>
+</div>
+            
           </div>
         );
       })}

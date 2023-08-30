@@ -108,6 +108,7 @@ return(
               </MDBCol>
               <MDBCol md="1" lg="1" xl="1" className="text-end">
                 <a href="#!" className="text-danger" >
+
                 <MDBBtn noRipple className='me-1' color='danger' onClick={() => {
                 axios
                   .delete(`http://localhost:5000/card/${store._id}`, {
@@ -128,6 +129,7 @@ return(
               }}>
         Delete
       </MDBBtn>
+      
                   <MDBIcon fas icon="trash text-danger" size="lg"  />
                 </a>
               </MDBCol>
