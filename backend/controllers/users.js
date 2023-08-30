@@ -17,7 +17,6 @@ const register = (req, res) => {
 
   //saler role id = "64e21139f853bb6a9f066186"
   //customer role id ="64e211c3a8d39e6e0caf32c0"
-
   newUser
     .save()
     .then((result) => {
@@ -37,12 +36,12 @@ const register = (req, res) => {
           message: `The email already exists`,
         });
       }
-      if(err.errors){
-        return res.status(409).json({
-          success: false,
-          message: `The email should be like this (name_lastName@gmail.com)`,
-        });
-      }
+      // if(err.errors){
+      //   return res.status(409).json({
+      //     success: false,
+      //     message: `The email should be like this (name_lastName@gmail.com)`,
+      //   });
+      // }
       console.log(err.errors);
       res.status(500).json({
         success: false,
@@ -55,7 +54,8 @@ const register = (req, res) => {
 const login = (req, res) => {
   const password = req.body.password;
   const email = req.body.email.toLowerCase();
-
+  console.log(password,email);
+console.log(req.body);
   userModel
     .findOne({ email })
     .populate("role")
@@ -72,6 +72,7 @@ const login = (req, res) => {
           return res.status(403).json({
             success: false,
             message: `The email doesn't exist or The password you’ve entered is incorrect`,
+          
           });
         }
         const payload = {
