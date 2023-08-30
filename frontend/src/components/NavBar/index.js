@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../NavBar/style.css"
+import "../NavBar/style.css";
 import {
   MDBContainer,
   MDBNavbar,
@@ -17,7 +17,8 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBCollapse,
-  MDBCol, MDBFormInline
+  MDBCol,
+  MDBFormInline,
 } from "mdb-react-ui-kit";
 
 import { IconName } from "react-icons/di";
@@ -32,10 +33,11 @@ const NavBar = () => {
     <div>
       <MDBNavbar expand="lg" light bgColor="light">
         <MDBContainer fluid>
-          <MDBNavbarBrand href="#">
+          <MDBNavbarBrand href="#" className="navbarImeg">
             <img
-              src="https://dearguest.com/wp-content/uploads/2017/04/branding-750x430.jpg"
-              height="70"
+              src="https://png2.cleanpng.com/sh/37e89fda72e78474130b352436713d5c/L0KzQYm3V8A0N6p4jZH0aYP2gLBuTgBmeqR0htN1LXL1cbBrif5oNZN3edDtLX3kfrLuhf1mdqUyedZBZYL3ecTwjvcuaqZ4RadrM3O3RoG4gsdnOpU4RqQ5Nki6RoSAUcU0OGc8Tqk8N0e4Q4a1kP5o/kisspng-personal-branding-brand-management-advertising-bus-5b3c4601b7f2d3.2068763715306767377535.png "
+              height="50"
+              width="150"
               alt=""
               loading="lazy"
             />
@@ -76,64 +78,63 @@ const NavBar = () => {
                 <MDBNavbarLink href="/contactUs">ContactUs</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
-            
-            <div className="search">
-            <form className="d-flex input-group w-auto">
-              <input
-                type="search"
-                className="form-control"
-                placeholder="Type to search.."
-                aria-label="Search"
-                onChange={(e) => {
-                  e.preventDefault()
-                  setInput(e.target.value);
-                }}
-              />
 
-              <MDBBtn  noRipple
-                outline rounded className='mx-2' color='danger'
-                onClick={(e) => {
-                  e.preventDefault()
-                  axios
-                    .get(`http://localhost:5000/product?name=${input}`)
-                    .then((response) => {
-                      setSearch(response.data.product);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                }}
-              >
-                Search
-              </MDBBtn>
-              
-            </form>
-            {input ? (
-       <div className="input">
-         {search.map((name, i) => {
-           return (
-             <div key={i}>
-               <p
-                 onClick={() => {
-                   navigate(`/productInfo/${name._id}`);
-                 }}
-               >
-                 {name.name}
-               </p>
-             </div>
-           );
-         })}
-       </div>
-     ) : 
-     null
-     }
+            <div className="search">
+              <form className="d-flex input-group w-auto">
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder="Type to search.."
+                  aria-label="Search"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setInput(e.target.value);
+                  }}
+                />
+
+                <MDBBtn
+                  noRipple
+                  outline
+                  rounded
+                  className="mx-2"
+                  color="danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    axios
+                      .get(`http://localhost:5000/product?name=${input}`)
+                      .then((response) => {
+                        setSearch(response.data.product);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  Search
+                </MDBBtn>
+              </form>
+              {input ? (
+                <div className="input">
+                  {search.map((name, i) => {
+                    return (
+                      <div key={i}>
+                        <p
+                          onClick={() => {
+                            navigate(`/productInfo/${name._id}`);
+                          }}
+                        >
+                          {name.name}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
 
-     
-      
       {/* {input ? (
        <div className="input">
          {search.map((name, i) => {
@@ -184,7 +185,6 @@ const NavBar = () => {
       >
         Search
       </button>  */}
-      
     </div>
   );
 };

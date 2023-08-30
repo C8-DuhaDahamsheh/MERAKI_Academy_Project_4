@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 import {
   MDBContainer,
   MDBCol,
@@ -12,18 +13,27 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import "../Login/style.css";
+import { decodeToken } from "react-jwt";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMssg, setErrMssg] = useState("");
   const [succMssg, setSuccMssg] = useState("");
   const { setToken, setUserId, setShow } = useContext(userContext);
+  const [google, setGoogle] = useState();
+  const responseMessage = (response) => {
+    console.log(response);
+    const a = decodeToken(response.credential);
+    console.log(a);
+    setGoogle(a);
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
-
-const navigate =useNavigate()
+  const navigate = useNavigate();
   return (
     <div>
-      <h1>Login</h1>
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
           <MDBCol col="10" md="6">
@@ -66,7 +76,8 @@ const navigate =useNavigate()
               <a href="!#">Forgot password?</a>
             </div>
 
-            <MDBBtn  noRipple
+            <MDBBtn
+              noRipple
               className="mb-4 w-100"
               size="lg"
               onClick={() => {
@@ -82,9 +93,7 @@ const navigate =useNavigate()
                     setToken(response.data.token);
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data.userId);
-                    navigate("/category")
-     
-                    
+                    navigate("/category");
                   })
                   .catch((err) => {
                     console.log(err);
@@ -100,26 +109,50 @@ const navigate =useNavigate()
               <p className="text-center fw-bold mx-3 mb-0">OR</p>
             </div>
 
-            <MDBBtn  noRipple
+            {/* <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
               style={{ backgroundColor: "#3b5998" }}
             >
               <MDBIcon fab icon="facebook-f" className="mx-2" />
               Continue with facebook
-            </MDBBtn>
+            </MDBBtn> */}
+            <GoogleLogin className="w-100"
+              onSuccess={responseMessage}
+              onError={errorMessage}
+              onClick={() => {
+                axios
+                  .post("http://localhost:5000/users/login", {
+                    email: google.email,
+                    password: google.sub,
+                  })
+                  .then((response) => {
+                    console.log(response.data.userId);
+                    setUserId(response.data.userId);
+                    setSuccMssg(response.data.message);
+                    setToken(response.data.token);
+                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("userId", response.data.userId);
+                    navigate("/category");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setErrMssg(err.response.data.message);
+                  });
+              }}
+            />
 
-            <MDBBtn  noRipple
+            {/* <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
               style={{ backgroundColor: "#55acee" }}
             >
-              <MDBIcon fab icon="twitter" className="mx-2" />
-              Continue with twitter
-            </MDBBtn>
+              
+            </MDBBtn> */}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+
       {/* {setShow(false)}
       <input
         type="email"

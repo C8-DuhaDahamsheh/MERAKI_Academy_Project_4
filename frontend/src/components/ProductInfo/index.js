@@ -4,6 +4,8 @@ import { userContext } from "../../App";
 import Loader from "react-js-loader";
 import axios from "axios";
 import "../ProductInfo/style.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBCard,
   MDBCardBody,
@@ -37,6 +39,34 @@ const ProductInfo = () => {
         console.log(error);
       });
   }, [id]);
+
+  const notifyFav = () => toast.success("Add Successfully To Favorit", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+const notifyBag =()=> toast.success("Add Successfully To Bag", {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+  });
+
+
+
+
+
+
 
   if (!itemInfo) {
     return (
@@ -117,7 +147,7 @@ const ProductInfo = () => {
               color="info"
               onClick={() => {
                 {
-                  token ? navigate(`/card`) : navigate("/users/login");
+                  token ? notifyBag() : navigate("/users/login");
                 }
                 axios
                   .post(
@@ -154,7 +184,7 @@ const ProductInfo = () => {
               color="info"
               onClick={() => {
                 {
-                  token ? navigate(`/favorit`) : navigate("/users/login");
+                  token ? notifyFav() : navigate("/users/login");
                 }
 
                 axios
@@ -188,7 +218,7 @@ const ProductInfo = () => {
           </MDBCol>
         </MDBRow>
       </MDBCard>
-
+      <ToastContainer />
       {/* <img src={itemInfo.image} width="350" height="350" />
         <div className="info">
           <h3>{itemInfo.name}</h3>

@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { GoogleLogin } from '@react-oauth/google'
+import { decodeToken } from "react-jwt";
 import {
   MDBBtn,
   MDBContainer,
@@ -23,8 +24,18 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
+  const [google ,setGoogle] = useState ()
   const navigate = useNavigate();
+
+  const responseMessage = (response) => {
+    console.log(response);
+    const a = decodeToken(response.credential)
+    console.log(a);
+    setGoogle(a)
+};
+const errorMessage = (error) => {
+    console.log(error);
+};
   return (
     <div>
       <h3>Register</h3>
@@ -40,7 +51,26 @@ const Register = () => {
                 <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
-
+                <GoogleLogin onSuccess={responseMessage} onError={errorMessage} onClick={() => {
+                    axios
+                      .post("http://localhost:5000/users/register", {
+                        fname: google.given_name,
+                        lname: google.family_name,
+                        email :google.email,
+                        password :google.sub,
+                        age :google.iat,
+                        country :google.jti,
+                      })
+                      .then((response) => {
+                        setSuccess(response.data.message);
+                        navigate("/users/login");
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        setError(err.response.data.err);
+                      });
+                  }}/>
+                <br/>
                 <div className="d-flex flex-row align-items-center mb-4 ">
                   <MDBIcon fas icon="user me-3" size="lg" />
                   <MDBInput
@@ -49,7 +79,8 @@ const Register = () => {
                     type="text"
                     className="w-100"
                     onChange={(e) => {
-                      setFirstName(e.target.value);
+                      setFirstName(e.target.value );
+                       
                     }}
                   />
                 </div>
@@ -61,7 +92,7 @@ const Register = () => {
                     type="text"
                     className="w-100"
                     onChange={(e) => {
-                      setLastName(e.target.value);
+                      setLastName(e.target.value );
                     }}
                   />
                 </div>
@@ -140,12 +171,12 @@ const Register = () => {
                   onClick={() => {
                     axios
                       .post("http://localhost:5000/users/register", {
-                        fname: fName,
-                        lname: lName,
-                        email,
-                        password,
-                        age,
-                        country,
+                        fname : fName,
+                        lname:lName,
+                        email ,
+                        password ,
+                        age ,
+                        country ,
                       })
                       .then((response) => {
                         setSuccess(response.data.message);

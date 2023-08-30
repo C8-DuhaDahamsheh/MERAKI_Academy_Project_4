@@ -4,6 +4,8 @@ import { userContext } from "../../App";
 import Loader from "react-js-loader";
 import axios from "axios";
 import "../Product/style.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBContainer,
   MDBRow,
@@ -34,7 +36,7 @@ const Product = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const { id } = useParams();
-
+  const [add, setAdd] = useState("");
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}/category`)
@@ -45,6 +47,18 @@ const Product = () => {
         console.log(err);
       });
   }, []);
+
+  const notify = () => toast.success("Add Successfully To Favorit", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
 
   if (item === undefined) {
     <div className={"item"}>
@@ -61,12 +75,14 @@ const Product = () => {
   return (
     <div className="product">
       <MDBContainer>
+        
         <MDBRow className="row-cols-3 row-cols-md-3 g-4">
+        
           {item.map((produc, i) => {
             return (
-              <div key={i} >
+              <div key={i}>
                 <MDBCol size="md" className="h-100">
-                  <MDBCard  className='h-100 w-75'>
+                  <MDBCard className="h-100 w-75">
                     {/* <MDBRipple
                 rippleColor="light"
                 rippleTag="div"
@@ -76,7 +92,7 @@ const Product = () => {
                       src={produc.image}
                       width="100"
                       height="200"
-                      position='top'
+                      position="top"
                       onClick={() => {
                         setInfo(produc._id);
                         navigate(`/productInfo/${produc._id}`);
@@ -104,11 +120,11 @@ const Product = () => {
                       </MDBCardText>
                       <MDBBtn
                         noRipple
-                        color='success'
+                        color="success"
                         onClick={() => {
                           {
                             token
-                              ? navigate(`/favorit`)
+                              ? notify()
                               : navigate("/users/login");
                           }
 
@@ -146,6 +162,7 @@ const Product = () => {
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
+
                 {/* <img className="imgForProduct"
               src={produc.image}
               width="200"
@@ -206,6 +223,7 @@ const Product = () => {
               </div>
             );
           })}
+          <ToastContainer />
         </MDBRow>
       </MDBContainer>
     </div>

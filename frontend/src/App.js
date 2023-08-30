@@ -11,6 +11,7 @@ import Card from "./components/Card";
 import Order from "./components/Order";
 import Favorit from "./components/Favorit";
 import ContactUs from "./components/ContactUs";
+
 export const userContext = createContext();
 function App() {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ function App() {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [total, setTotal] = useState(totalCost||0);
+
+ 
 
   return (
     <div className="App">
