@@ -2,9 +2,9 @@ const order = require("../models/order");
 const orderModel = require("../models/order");
 
 const creatOrder = (req, res) => {
-  const { user, card, phoneNumber, address } = req.body;
+  const { user, card, phoneNumber, address , chekedOut} = req.body;
 
-  const newOrder = new orderModel({ user, card, phoneNumber, address ,chekedOut :"Not Cheked Out"});
+  const newOrder = new orderModel({ user, card, phoneNumber, address , chekedOut});
 
   newOrder
     .save()
@@ -95,7 +95,7 @@ const updatOrderById = (req, res) => {
 };
 
 const deleteOrderById = (req, res) => {
-  const id = re.params.id;
+  const id = req.params.id;
 
   orderModel
     .findByIdAndDelete(id)

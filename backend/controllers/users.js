@@ -54,8 +54,8 @@ const register = (req, res) => {
 const login = (req, res) => {
   const password = req.body.password;
   const email = req.body.email.toLowerCase();
-  console.log(password,email);
-console.log(req.body);
+ 
+
   userModel
     .findOne({ email })
     .populate("role")
