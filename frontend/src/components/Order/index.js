@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { userContext } from "../../App";
+import "../Order/style.css"
 import {
   MDBBtn,
   MDBCol,
@@ -14,6 +15,9 @@ import {
   MDBModalHeader,
   MDBRow,
   MDBTypography,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage
 } from "mdb-react-ui-kit";
 const Order = () => {
   const [order, setOrder] = useState([]);
@@ -41,7 +45,7 @@ const Order = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bigContainer">
       {/* <h4>Your Address:</h4>
       <h4>{order.address}</h4>
       <h4>Your Phone Number :</h4>
@@ -78,14 +82,69 @@ const Order = () => {
       >
         ChekedOut?
       </button> */}
+ <MDBContainer className="storContainer">
+{card.map((store, i) => {
+  console.log(store);
+        return (
+         
+       
+<MDBCard className="rounded-3 mb-4">
+          <MDBCardBody className="p-4">
+            <MDBRow className="justify-content-between align-items-center">
+              <MDBCol md="2" lg="2" xl="2">
+                <MDBCardImage className="rounded-3" fluid
+                  src={store.product.image}
+                  alt="Cotton T-shirt"  onClick={() => {
+                    
+                  }} />
+              </MDBCol>
+              <MDBCol md="3" lg="3" xl="3">
+                <p className="lead fw-normal mb-2" >{store.product.name}</p>
+                <p>
+                  <span className="text-muted">Size:  {store.size}</span>
+                  <br/>
+                  <span className="text-muted">Color:{store.color} </span>
+                  <br/>
+                </p>
+              </MDBCol>
+              
+              <MDBCol md="3" lg="2" xl="2" className="offset-lg-1">
+                <MDBTypography tag="h5" className="mb-0">
+                {store.product.price} JD
+                </MDBTypography>
+              </MDBCol>
+              <MDBCol md="3" lg="2" xl="2" className="offset-lg-1">
+                <MDBTypography tag="h5" className="mb-0">
+                ({store.quantity} piece)
+                </MDBTypography>
+              </MDBCol>
+              <MDBCol md="1" lg="1" xl="1" className="text-end">
+                <a href="#!" className="text-danger" >
+                  <MDBIcon fas icon="trash text-danger" size="lg"  />
+                </a>
+              </MDBCol>
+            </MDBRow>
+          </MDBCardBody>
+        </MDBCard>
+        
+);
+      })}
+</MDBContainer>
 
-      <>
-        <section className="vh-100" style={{ backgroundColor: "#35558a" }}>
-          <MDBContainer className="py-5 h-100">
+
+
+
+
+
+
+
+    
+        
+          <MDBContainer className="py-5 h-50">
             <MDBRow className="justify-content-center align-items-center h-100 text-center">
               <MDBCol>
-                <MDBBtn noRipple color="light" size="lg" onClick={toggleShow}>
-                  <MDBIcon fas icon="info me-2" /> Get information
+                <MDBBtn noRipple color="dark" size="lg" onClick={toggleShow}>
+                  <MDBIcon fas icon="info me-2" /> Get pay information
                 </MDBBtn>
                 <MDBModal
                   show={basicModal}
@@ -183,11 +242,9 @@ const Order = () => {
                           className="mb-1"
                           onClick={() => {
                             axios
-                              .put(`http://localhost:5000/order/${orderId}`, {
-                                chekedOut: "Cheked Out",
-                              })
+                              .delete(`http://localhost:5000/order/${orderId}`)
                               .then((response) => {
-                                console.log(response.data);
+                                console.log(response);
                                 
                               })
                               .catch((err) => {
@@ -204,8 +261,8 @@ const Order = () => {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-        </section>
-      </>
+        
+      
 
       {/* <button
         onClick={() => {

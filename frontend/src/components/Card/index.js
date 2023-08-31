@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import "../Card/style.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBBtn,
   MDBCard,
@@ -15,7 +18,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 const Card = () => {
-  const { token,cardId ,userId ,setOrderId ,total, setTotal }  = useContext(userContext);
+  const { token,cardId ,userId ,setOrderId ,total, setTotal ,setCardId}  = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -53,6 +56,32 @@ const grandTotal = item.reduce(
   setTotal(grandTotal)
   localStorage.setItem("total" , grandTotal)
 console.log(grandTotal);
+
+
+const notifySucc = () => toast.success("Order Created...", {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+  });
+
+
+  const notifyErr = () => toast.error("The Item Was Deleted...", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+
   if (!item) {
     return <h1>loding</h1>;
   }
@@ -60,7 +89,7 @@ console.log(grandTotal);
  
   return (
     
-      <section className="h-100" style={{ backgroundColor: "#eee" }}>
+      
   <MDBContainer className="py-5 h-100">
     <MDBRow className="justify-content-center align-items-center h-100">
       <MDBCol md="10">
@@ -85,6 +114,7 @@ return(
           <MDBCardBody className="p-4">
             <MDBRow className="justify-content-between align-items-center">
               <MDBCol md="2" lg="2" xl="2">
+                {setCardId(store._id)}
                 <MDBCardImage className="rounded-3" fluid
                   src={store.product.image}
                   alt="Cotton T-shirt"  onClick={() => {
@@ -97,6 +127,7 @@ return(
                   }}>{store.product.name}</p>
                 <p>
                   <span className="text-muted">Size:  {store.size}</span>
+                  <br/>
                   <span className="text-muted">Color:{store.color} </span>
                 </p>
               </MDBCol>
@@ -110,6 +141,7 @@ return(
                 <a href="#!" className="text-danger" >
 
                 <MDBBtn noRipple className='me-1' color='danger' onClick={() => {
+                  notifyErr()
                 axios
                   .delete(`http://localhost:5000/card/${store._id}`, {
                     headers: {
@@ -151,12 +183,14 @@ return(
         }}/>
             <MDBBtn  noRipple className="ms-3" color="warning" outline size="lg" onClick={() => {
           console.log(cardId)
+          notifySucc()
           axios
             .post("http://localhost:5000/order/", {
               user: userId,
               card :cardId,
               phoneNumber,
               address,
+              chekedOut :"Not Cheked Out",
             })
             .then((response) => {
                 setSuccess(response.data.message)
@@ -180,7 +214,7 @@ return(
           <MDBCardBody>
           <h4>Total Cost : {total} JD</h4>
             <MDBBtn noRipple className="ms-3" color="warning" block size="lg" onClick={()=>{
-        
+           
         axios.put(`http://localhost:5000/card/${userId}/user`,{isOrderd:true},{
           headers: {
             authorization: `Bearer ${token}`,
@@ -191,16 +225,18 @@ return(
         }).catch((err)=>{
           console.log(err);
         })
+        
           navigate("/order")
         }}>
               Order It ?
             </MDBBtn>
           </MDBCardBody>
         </MDBCard>
+        <ToastContainer />
         </MDBCol>
     </MDBRow>
   </MDBContainer>
-</section>
+
 
   )
 

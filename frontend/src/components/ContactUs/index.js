@@ -1,23 +1,59 @@
-import React, { useRef } from 'react';
+import React, { useRef ,useState  } from 'react';
 import emailjs from '@emailjs/browser';
 import "../ContactUs/style.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBInput,
   MDBCheckbox,
   MDBBtn,
   MDBContainer
 } from 'mdb-react-ui-kit'
+
  const ContactUs = () => {
+  const [messg ,setMessg]=useState("")
+const[success ,setSuccess]=useState(true)
+  const notifySucc = () => toast.success("Send Message Successfully", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+
+    const notifyErr = () => toast.error("Send Message Faild...", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+
+
+
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+    emailjs.sendForm('service_aesfl0b', 'template_lz0dgna', form.current, 'AeudsNtPdl-qTBqqj')
       .then((result) => {
-          console.log(result.text);
+          console.log('SUCCESS!', result.status, result.text);
+          setMessg("SUCCESS!")
+          setSuccess(true)
+         
       }, (error) => {
-          console.log(error.text);
+          console.log('FAILED...', error.text);
+          setMessg("FAILED...")
+          setSuccess(false)
+        
       });
   };
 
@@ -45,12 +81,17 @@ import {
         label='Send me a copy of this message'
         defaultChecked
       />
-
-      <MDBBtn noRipple type='submit' className='mb-4' block>
+       <ToastContainer />
+      <MDBBtn noRipple type='submit' className='mb-4' block  onClick={()=>{
+        success ? notifySucc() : notifyErr()
+      }}>
       Submit
       </MDBBtn>
+     
     </form>
+    
 </MDBContainer>
+
   );
 };
 

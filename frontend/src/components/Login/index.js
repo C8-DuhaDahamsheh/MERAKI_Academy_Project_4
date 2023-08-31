@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBContainer,
   MDBCol,
@@ -21,6 +23,32 @@ const Login = () => {
   const [succMssg, setSuccMssg] = useState("");
   const { setToken, setUserId, setShow } = useContext(userContext);
   const [google, setGoogle] = useState();
+
+
+  const notifySucc = () => toast.success("Login Successfully", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+
+    const notifyErr = () => toast.error({errMssg}, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+
+
   const responseMessage = (response) => {
     console.log(response);
     const a = decodeToken(response.credential);
@@ -33,7 +61,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="loginPag">
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
           <MDBCol col="10" md="6">
@@ -81,6 +109,7 @@ const Login = () => {
               className="mb-4 w-100"
               size="lg"
               onClick={() => {
+                notifySucc()
                 axios
                   .post("http://localhost:5000/users/login", {
                     email,
@@ -93,18 +122,22 @@ const Login = () => {
                     setToken(response.data.token);
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data.userId);
-                    navigate("/category");
+                    
+                    navigate("/category"); 
+                    
                   })
                   .catch((err) => {
                     console.log(err);
                     setErrMssg(err.response.data.message);
+                    notifyErr()
                   });
+                 
               }}
+              
             >
               Sign in
             </MDBBtn>
-            <h2>{succMssg}</h2>
-            <h2>{errMssg}</h2>
+           
             <div className="divider d-flex align-items-center my-4">
               <p className="text-center fw-bold mx-3 mb-0">OR</p>
             </div>
@@ -117,31 +150,36 @@ const Login = () => {
               <MDBIcon fab icon="facebook-f" className="mx-2" />
               Continue with facebook
             </MDBBtn> */}
-            <GoogleLogin className="w-100"
-              onSuccess={responseMessage}
-              onError={errorMessage}
-              onClick={() => {
+            
+<MDBBtn noRipple outline onClick={() => {
+                  notifySucc()
                 axios
                   .post("http://localhost:5000/users/login", {
                     email: google.email,
                     password: google.sub,
                   })
                   .then((response) => {
+                    
                     console.log(response.data.userId);
                     setUserId(response.data.userId);
                     setSuccMssg(response.data.message);
                     setToken(response.data.token);
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data.userId);
-                    navigate("/category");
+                    navigate("/category")
+                    ;
                   })
                   .catch((err) => {
                     console.log(err);
-                    setErrMssg(err.response.data.message);
+                    setSuccMssg(err.response.data.message);
+                    notifyErr()
                   });
-              }}
-            />
-
+                  
+              }}><GoogleLogin className="w-100"
+              onSuccess={responseMessage}
+              onError={errorMessage}
+              
+            />Login With Google</MDBBtn>
             {/* <MDBBtn  noRipple
               className="mb-4 w-100"
               size="lg"
@@ -149,8 +187,11 @@ const Login = () => {
             >
               
             </MDBBtn> */}
+            
           </MDBCol>
+          
         </MDBRow>
+        <ToastContainer />
       </MDBContainer>
 
       {/* {setShow(false)}
@@ -191,6 +232,7 @@ const Login = () => {
 
       {/* <h2>{succMssg}</h2>
       <h2>{errMssg}</h2> */}
+      
     </div>
   );
 };

@@ -172,6 +172,9 @@ const notifyBag =()=> toast.success("Add Successfully To Bag", {
                   })
                   .catch((err) => {
                     console.log(err);
+                    if(err.response.status){
+                      return localStorage.removeItem("token");
+                    }
                   });
               }}
             >
@@ -210,6 +213,9 @@ const notifyBag =()=> toast.success("Add Successfully To Bag", {
                   })
                   .catch((err) => {
                     console.log(err);
+                    if(err.response.status){
+                      return localStorage.removeItem("token");
+                    }
                   });
               }}
             >

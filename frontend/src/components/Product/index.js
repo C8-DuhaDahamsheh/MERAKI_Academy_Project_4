@@ -154,6 +154,9 @@ const Product = () => {
                             })
                             .catch((err) => {
                               console.log(err);
+                              if(err.response.status){
+                                return localStorage.removeItem("token");
+                              }
                             });
                         }}
                       >

@@ -1,6 +1,6 @@
 
 .productInfo{
-    margin: 50px 75px;
+    margin: 50px 120px;
     font: 20px bold ;
 }
 
@@ -18,3 +18,6 @@
     margin: 5px;
 }
 
+.infoPag{
+    background-color:lightblue ;
+}

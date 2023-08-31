@@ -33,7 +33,7 @@ function App() {
   const [size, setSize] = useState("");
   const [total, setTotal] = useState(totalCost||0);
 
- 
+console.log(cardId); 
 
   return (
     <div className="App">

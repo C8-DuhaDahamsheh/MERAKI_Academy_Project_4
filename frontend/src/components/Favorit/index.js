@@ -16,7 +16,8 @@ import {
 } from 'mdb-react-ui-kit';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../Favorit/style.css"  
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  const Favorit = () => {
     const { token,cardId ,userId ,setOrderId ,total, setTotal }  = useContext(userContext);
   const navigate = useNavigate();
@@ -42,6 +43,18 @@ import "../Favorit/style.css"
         }
       });
   }, []);
+
+  const notifyErr = () => toast.error("The Item Was Deleted...", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
 
   if (!item) {
     return <h1>loding</h1>;
@@ -75,6 +88,7 @@ return (
             <MDBBtn noRipple className='mx-2' color='danger'
                   
                   onClick={() => {
+                    notifyErr()
                     axios
                   .delete(`http://localhost:5000/card/${store._id}`, {
                     headers: {
@@ -100,7 +114,7 @@ return (
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
-      
+      <ToastContainer />
 
 
 

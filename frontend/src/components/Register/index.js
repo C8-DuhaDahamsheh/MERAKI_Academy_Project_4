@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google'
 import { decodeToken } from "react-jwt";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../Register/style.css"
 import {
   MDBBtn,
   MDBContainer,
@@ -27,6 +30,30 @@ const Register = () => {
   const [google ,setGoogle] = useState ()
   const navigate = useNavigate();
 
+
+  const notifySucc = () => toast.success({success}, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+
+    const notifyErr = () => toast.error({error}, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+
   const responseMessage = (response) => {
     console.log(response);
     const a = decodeToken(response.credential)
@@ -37,9 +64,9 @@ const errorMessage = (error) => {
     console.log(error);
 };
   return (
-    <div>
-      <h3>Register</h3>
-      <MDBContainer fluid>
+    <div className="registerPag">
+      
+      <MDBContainer  >
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>
             <MDBRow>
@@ -48,10 +75,11 @@ const errorMessage = (error) => {
                 lg="6"
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
               >
-                <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
-                <GoogleLogin onSuccess={responseMessage} onError={errorMessage} onClick={() => {
+                
+                  <MDBBtn noRipple  outline onClick={() => {
                     axios
                       .post("http://localhost:5000/users/register", {
                         fname: google.given_name,
@@ -62,14 +90,18 @@ const errorMessage = (error) => {
                         country :google.jti,
                       })
                       .then((response) => {
-                        setSuccess(response.data.message);
+                        
                         navigate("/users/login");
+                        setSuccess(response.data.message);
+                        notifySucc()
                       })
                       .catch((err) => {
                         console.log(err);
                         setError(err.response.data.err);
+                        notifyErr()
+
                       });
-                  }}/>
+                  }}><GoogleLogin onSuccess={responseMessage} onError={errorMessage} />Register With Google</MDBBtn>
                 <br/>
                 <div className="d-flex flex-row align-items-center mb-4 ">
                   <MDBIcon fas icon="user me-3" size="lg" />
@@ -181,10 +213,12 @@ const errorMessage = (error) => {
                       .then((response) => {
                         setSuccess(response.data.message);
                         navigate("/users/login");
+                        notifySucc()
                       })
                       .catch((err) => {
                         console.log(err);
                         setError(err.response.data.err);
+                        notifyErr()
                       });
                   }}
                 >
@@ -207,6 +241,7 @@ const errorMessage = (error) => {
             </MDBRow>
           </MDBCardBody>
         </MDBCard>
+        <ToastContainer />
       </MDBContainer>
       {/* <input
         type="text"
@@ -278,8 +313,7 @@ const errorMessage = (error) => {
         Register
       </button> */}
 
-      <h3>{success}</h3>
-      <h3>{error}</h3>
+      
     </div>
   );
 };
