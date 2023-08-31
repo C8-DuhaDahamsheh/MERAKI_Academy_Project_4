@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   country: { type: String },
   email: { type: String, required: true, unique: true ,  match: [/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/] },
   password: { type: String, required: true },
-  role : {type :mongoose.Schema.Types.ObjectId ,ref :"Role" ,required:true}
+  role : {type :mongoose.Schema.Types.ObjectId ,ref :"Role" ,required:true},
+  favarite:[{type:mongoose.Schema.Types.ObjectId,ref:"Favorit"}] ,
 });
 
 
