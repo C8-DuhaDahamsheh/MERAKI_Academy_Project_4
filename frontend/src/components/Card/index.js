@@ -90,7 +90,7 @@ const notifySucc = () => toast.success("Order Created...", {
   return (
     
       
-  <MDBContainer className="py-5 h-100">
+  <MDBContainer className="cart py-5 h-100">
     <MDBRow className="justify-content-center align-items-center h-100">
       <MDBCol md="10">
      <div className="d-flex justify-content-between align-items-center mb-4">
@@ -110,7 +110,7 @@ const notifySucc = () => toast.success("Order Created...", {
 return(
         
 
-        <MDBCard className="rounded-3 mb-4">
+        <MDBCard className="cardbody1 rounded-3 mb-4">
           <MDBCardBody className="p-4">
             <MDBRow className="justify-content-between align-items-center">
               <MDBCol md="2" lg="2" xl="2">
@@ -140,7 +140,7 @@ return(
               <MDBCol md="1" lg="1" xl="1" className="text-end">
                 <a href="#!" className="text-danger" >
 
-                <MDBBtn noRipple className='me-1' color='danger' onClick={() => {
+                <MDBBtn noRipple className='deleteButton me-1' color='danger' onClick={() => {
                   notifyErr()
                 axios
                   .delete(`http://localhost:5000/card/${store._id}`, {

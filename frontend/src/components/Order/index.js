@@ -88,7 +88,7 @@ const Order = () => {
         return (
          
        
-<MDBCard className="rounded-3 mb-4">
+<MDBCard className="orederCard  rounded-3 mb-4">
           <MDBCardBody className="p-4">
             <MDBRow className="justify-content-between align-items-center">
               <MDBCol md="2" lg="2" xl="2">
@@ -245,6 +245,9 @@ const Order = () => {
                               .delete(`http://localhost:5000/order/${orderId}`)
                               .then((response) => {
                                 console.log(response);
+                                setOrder(order.filter((ordr)=>{
+                                  return ordr._id !== order._id
+                                }))
                                 
                               })
                               .catch((err) => {

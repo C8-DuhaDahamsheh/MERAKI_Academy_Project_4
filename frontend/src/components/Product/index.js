@@ -127,37 +127,13 @@ const Product = () => {
                               ? notify()
                               : navigate("/users/login");
                           }
-
-                          axios
-                            .post(
-                              "http://localhost:5000/card/",
-                              {
-                                product: produc._id,
-                                quantity,
-                                isOrderd: false,
-                                color,
-                                size,
-                              },
-                              {
-                                headers: {
-                                  authorization: `Bearer ${token}`,
-                                },
-                              }
-                            )
-                            .then((respones) => {
-                              setCardId([...cardId, respones.data.card._id]);
-                              localStorage.setItem(
-                                "cardId",
-                                respones.data.card._id
-                              );
-                              console.log(respones.data.card._id);
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                              if(err.response.status){
-                                return localStorage.removeItem("token");
-                              }
-                            });
+                          axios.post("http://localhost:5000/favorit",{product:produc._id ,user:userId }).then((respones)=>{
+                            console.log(respones.data);
+                          }).catch((err)=>{
+                            console.log(err);
+                          })
+                            setProductId(produc._id)
+                            // navigate(`/favorit`)
                         }}
                       >
                         Add To Favorit

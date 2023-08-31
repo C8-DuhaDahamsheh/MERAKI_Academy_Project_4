@@ -33,6 +33,7 @@ function App() {
   const [size, setSize] = useState("");
   const [total, setTotal] = useState(totalCost||0);
 
+  console.log(productId);
 console.log(cardId); 
 
   return (

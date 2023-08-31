@@ -4,8 +4,8 @@ import { userContext } from "../../App";
 import Loader from "react-js-loader";
 import axios from "axios";
 import "../ProductInfo/style.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   MDBCard,
   MDBCardBody,
@@ -26,7 +26,7 @@ const ProductInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-  const { token, setShow, setCardId, cardId, color, setColor, size, setSize } =
+  const { token, setShow, setCardId, cardId, color, setColor, size, setSize,userId } =
     useContext(userContext);
   useEffect(() => {
     axios
@@ -40,33 +40,29 @@ const ProductInfo = () => {
       });
   }, [id]);
 
-  const notifyFav = () => toast.success("Add Successfully To Favorit", {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
+  const notifyFav = () =>
+    toast.success("Add Successfully To Favorit", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
     });
 
-const notifyBag =()=> toast.success("Add Successfully To Bag", {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "colored",
-  });
-
-
-
-
-
-
+  const notifyBag = () =>
+    toast.success("Add Successfully To Bag", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   if (!itemInfo) {
     return (
@@ -172,7 +168,7 @@ const notifyBag =()=> toast.success("Add Successfully To Bag", {
                   })
                   .catch((err) => {
                     console.log(err);
-                    if(err.response.status){
+                    if (err.response.status) {
                       return localStorage.removeItem("token");
                     }
                   });
@@ -189,34 +185,17 @@ const notifyBag =()=> toast.success("Add Successfully To Bag", {
                 {
                   token ? notifyFav() : navigate("/users/login");
                 }
-
                 axios
-                  .post(
-                    "http://localhost:5000/card/",
-                    {
-                      product: itemInfo._id,
-                      quantity,
-                      isOrderd: false,
-                      color,
-                      size,
-                    },
-                    {
-                      headers: {
-                        authorization: `Bearer ${token}`,
-                      },
-                    }
-                  )
+                  .post("http://localhost:5000/favorit", {
+                    product: itemInfo._id,user:userId
+                  })
                   .then((respones) => {
                     console.log(respones.data);
-                    setCardId([...cardId, respones.data.card._id]);
-                    localStorage.setItem("cardId", respones.data.card._id);
                   })
                   .catch((err) => {
                     console.log(err);
-                    if(err.response.status){
-                      return localStorage.removeItem("token");
-                    }
                   });
+                // navigate(`/favorit`);
               }}
             >
               ADD TO FAVORIT

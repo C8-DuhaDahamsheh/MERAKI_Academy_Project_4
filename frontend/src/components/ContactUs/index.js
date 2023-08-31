@@ -13,6 +13,11 @@ import {
  const ContactUs = () => {
   const [messg ,setMessg]=useState("")
 const[success ,setSuccess]=useState(true)
+const [name, setName] = useState("")
+const [message, setMessage] = useState("")
+const [email, setEmail] = useState("")
+
+
   const notifySucc = () => toast.success("Send Message Successfully", {
     position: "top-right",
     autoClose: 5000,
@@ -42,10 +47,15 @@ const[success ,setSuccess]=useState(true)
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    // const params ={
+    //   from_name:name,
+    //   from_email:email,
+    //   message:message
+    // }
+    // console.log(params);
     emailjs.sendForm('service_aesfl0b', 'template_lz0dgna', form.current, 'AeudsNtPdl-qTBqqj')
       .then((result) => {
-          console.log('SUCCESS!', result.status, result.text);
+          console.log('SUCCESS!', result, result.text);
           setMessg("SUCCESS!")
           setSuccess(true)
          
@@ -56,24 +66,36 @@ const[success ,setSuccess]=useState(true)
         
       });
   };
-
+  
   return (
-    // <form ref={form} onSubmit={sendEmail}>
-    //   <label>Name</label>
-    //   <input type="text" name="user_name" />
-    //   <label>Email</label>
-    //   <input type="email" name="user_email" />
-    //   <label>Message</label>
-    //   <textarea name="message" />
-    //   <input type="submit" value="Send" />
-    
 
-<MDBContainer className='formContact'>
+//     <form ref={form} onSubmit={sendEmail}>
+//       <label>Name</label>
+//       <input type="text" name="user_name" onChange={(e)=>{
+// setName(e.target.value)
+//       }} />
+//       <label>Email</label>
+//       <input type="email" name="user_email" onChange={(e)=>{
+// setEmail(e.target.value)
+//       }}/>
+//       <label>Message</label>
+//       <textarea name="message"  onChange={(e)=>{
+// setMessage(e.target.value)
+//       }}/>
+//       <input type="submit" value="Send" />
+//     </form>
+
+
+
+ <MDBContainer className='formContact'> 
 
 <form   ref={form} onSubmit={sendEmail} className='contact'>
-      <MDBInput id='form4Example1'className='w-25' wrapperClass='mb-4' label='Name' />
-      <MDBInput type='email' id='form4Example2' wrapperClass='mb-4' label='Email address'className='w-25' />
-      <MDBInput wrapperClass='mb-4' textarea id='form4Example3' rows={4} label='Message' className='w-25' />
+      <MDBInput id='form4Example1'className='w-100' wrapperClass='mb-4'type="text" name="user_name" label='Name'onChange={(e)=>{
+ setName(e.target.value)}} />
+      <MDBInput type='email' id='form4Example2'  name="user_email" wrapperClass='mb-4' label='Email address'className='w-100' onChange={(e)=>{
+ setEmail(e.target.value)}}/>
+      <MDBInput wrapperClass='mb-4' name="message"  textarea id='form4Example3' rows={4} label='Message' className='w-100'onChange={(e)=>{
+ setMessage(e.target.value)}} />
 
       <MDBCheckbox
         wrapperClass='d-flex justify-content-center mb-4'
@@ -82,15 +104,37 @@ const[success ,setSuccess]=useState(true)
         defaultChecked
       />
        <ToastContainer />
-      <MDBBtn noRipple type='submit' className='mb-4' block  onClick={()=>{
+       
+       <MDBInput type="submit" value="Send" className='send w-25' />
+
+      {/* <MDBBtn noRipple type='submit' className='mb-4' block  value="Send" onClick={()=>{
         success ? notifySucc() : notifyErr()
       }}>
       Submit
-      </MDBBtn>
+      </MDBBtn> */}
      
     </form>
     
+    
 </MDBContainer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   );
 };
@@ -98,3 +142,8 @@ const[success ,setSuccess]=useState(true)
 
 
 export default ContactUs
+
+
+
+
+

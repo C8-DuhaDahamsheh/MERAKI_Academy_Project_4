@@ -1,12 +1,20 @@
 
 
 .formContact{
-    background-color: aliceblue;
-    border: 5px solid rgb(211, 233, 252) ; 
+    background-color: rgb(240, 243, 255);
+     padding: 20px;
     margin: 50px 100px;
+    box-shadow: 10px 10px 5px lightblue;
 }
 
 .contact {
-    margin: 50px;
+    background-color: rgb(240, 243, 255);
+    /* border: 5px solid rgb(211, 233, 252) ;  */
+    margin: 50px 400px;
   
+}
+
+.send{
+    background-color: rgb(240, 243, 255);
+    border-color: rgb(184, 30, 3);
 }
