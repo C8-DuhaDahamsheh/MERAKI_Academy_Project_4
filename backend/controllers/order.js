@@ -122,7 +122,7 @@ const deleteOrderById = (req, res) => {
 
 const getOrderByUserId =(req ,res)=>{
   const id =req.params.id
-  orderModel.find({user:id ,chekedOut:"Cheked Out"}).populate({
+  orderModel.find({user:id}).populate({
     path: 'card',
     model: "Card",
     populate: {
