@@ -18,7 +18,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 const Card = () => {
-  const { token,cardId ,userId ,setOrderId ,total, setTotal ,setCardId}  = useContext(userContext);
+  const { token,cardId ,userId ,setOrderId ,total, setTotal  }  = useContext(userContext);
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -114,7 +114,7 @@ return(
           <MDBCardBody className="p-4">
             <MDBRow className="justify-content-between align-items-center">
               <MDBCol md="2" lg="2" xl="2">
-                {setCardId(store._id)}
+              
                 <MDBCardImage className="rounded-3" fluid
                   src={store.product.image}
                   alt="Cotton T-shirt"  onClick={() => {
@@ -187,7 +187,7 @@ return(
           axios
             .post("http://localhost:5000/order/", {
               user: userId,
-              card :cardId,
+              card :[...cardId],
               phoneNumber,
               address,
               chekedOut :"Not Cheked Out",

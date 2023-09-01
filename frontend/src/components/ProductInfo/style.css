@@ -2,6 +2,8 @@
 .productInfo{
     margin: 50px 120px;
     font: 20px bold ;
+    box-shadow: 10px 10px 5px lightblue;
+    background-color: aliceblue;
 }
 
 .card-img-left {
@@ -20,4 +22,9 @@
 
 .infoPag{
     background-color:lightblue ;
+}
+
+.quantity{
+    position: absolute;
+    right: 270px;
 }

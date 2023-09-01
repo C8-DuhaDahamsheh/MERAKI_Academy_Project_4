@@ -26,8 +26,17 @@ const ProductInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
-  const { token, setShow, setCardId, cardId, color, setColor, size, setSize,userId } =
-    useContext(userContext);
+  const {
+    token,
+    setShow,
+    setCardId,
+    cardId,
+    color,
+    setColor,
+    size,
+    setSize,
+    userId,
+  } = useContext(userContext);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${id}`)
@@ -100,7 +109,7 @@ const ProductInfo = () => {
                 return (
                   <MDBBtn
                     noRipple
-                    outline
+                    // outline
                     color="warning"
                     onClick={() => {
                       setSize(siz);
@@ -115,7 +124,7 @@ const ProductInfo = () => {
                 return (
                   <MDBBtn
                     noRipple
-                    outline
+                    // outline
                     color="warning"
                     onClick={() => {
                       setColor(colr);
@@ -125,10 +134,11 @@ const ProductInfo = () => {
                   </MDBBtn>
                 );
               })}
+              <MDBCardText>Quantity :</MDBCardText>
               <MDBInput
                 min={0}
                 defaultValue={1}
-                className="w-25"
+                className="quantity w-25"
                 type="number"
                 size="md"
                 onChange={(e) => {
@@ -138,7 +148,7 @@ const ProductInfo = () => {
             </MDBCardBody>
             <MDBBtn
               noRipple
-              outline
+              // outline
               className="mx-2"
               color="info"
               onClick={() => {
@@ -164,7 +174,7 @@ const ProductInfo = () => {
                   .then((respones) => {
                     console.log(respones.data);
                     setCardId([...cardId, respones.data.card._id]);
-                    localStorage.setItem("cardId", respones.data.card._id);
+                    localStorage.setItem("cardId", [respones.data.card._id]);
                   })
                   .catch((err) => {
                     console.log(err);
@@ -178,7 +188,7 @@ const ProductInfo = () => {
             </MDBBtn>
             <MDBBtn
               noRipple
-              outline
+              // outline
               className="mx-2"
               color="info"
               onClick={() => {
@@ -187,7 +197,8 @@ const ProductInfo = () => {
                 }
                 axios
                   .post("http://localhost:5000/favorit", {
-                    product: itemInfo._id,user:userId
+                    product: itemInfo._id,
+                    user: userId,
                   })
                   .then((respones) => {
                     console.log(respones.data);
@@ -202,8 +213,31 @@ const ProductInfo = () => {
             </MDBBtn>
           </MDBCol>
         </MDBRow>
+        <MDBBtn
+          noRipple
+          // outline
+          color="success"
+          className="w-25"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </MDBBtn>
+        <MDBBtn
+          noRipple
+          // outline
+          color="success"
+          className="w-25"
+          onClick={() => {
+            navigate("/card");
+          }}
+        >
+          Go To Cart
+        </MDBBtn>
       </MDBCard>
       <ToastContainer />
+
       {/* <img src={itemInfo.image} width="350" height="350" />
         <div className="info">
           <h3>{itemInfo.name}</h3>
