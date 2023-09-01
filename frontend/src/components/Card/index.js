@@ -181,7 +181,7 @@ return(
         onChange={(e) => {
           setAdress(e.target.value);
         }}/>
-            <MDBBtn  noRipple className="ms-3" color="warning" outline size="lg" onClick={() => {
+            <MDBBtn  noRipple className="ms-3" color="info" outline size="lg" onClick={() => {
           console.log(cardId)
           notifySucc()
           axios
@@ -213,7 +213,7 @@ return(
         <MDBCard>
           <MDBCardBody>
           <h4>Total Cost : {total} JD</h4>
-            <MDBBtn noRipple className="ms-3" color="warning" block size="lg" onClick={()=>{
+            <MDBBtn noRipple className="ms-3" color="primary" block size="lg" onClick={()=>{
            
         axios.put(`http://localhost:5000/card/${userId}/user`,{isOrderd:true},{
           headers: {

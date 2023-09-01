@@ -139,7 +139,13 @@ const Favorit = () => {
           
         </MDBRow>
         <ToastContainer />
+        <div className="backButton">
+        <MDBBtn noRipple  color="secondary" className="w-100" onClick={()=>{
+        navigate("/category")
+      }}>Back To Home</MDBBtn>
+      </div>
       </MDBContainer>
+      
     </div>
   );
 };

@@ -120,7 +120,7 @@ const Product = () => {
                       </MDBCardText>
                       <MDBBtn
                         noRipple
-                        color="success"
+                        color="info"
                         onClick={() => {
                           {
                             token
@@ -209,11 +209,11 @@ const Product = () => {
          
       </MDBContainer>
       <div className="buttonProduct">
-      <MDBBtn noRipple outline color="success" className="w-100" onClick={()=>{
+      <MDBBtn noRipple  color="secondary" className="w-100" onClick={()=>{
         navigate(-1)
       }}>Back</MDBBtn>
       <br/>
-      <MDBBtn noRipple outline color="success" className="w-100" onClick={()=>{
+      <MDBBtn noRipple  color="secondary" className="w-100" onClick={()=>{
         navigate("/card")
       }}>Go To Cart</MDBBtn>
       </div>

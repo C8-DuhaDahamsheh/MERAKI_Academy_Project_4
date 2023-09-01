@@ -110,7 +110,7 @@ const ProductInfo = () => {
                   <MDBBtn
                     noRipple
                     // outline
-                    color="warning"
+                    color="info"
                     onClick={() => {
                       setSize(siz);
                     }}
@@ -125,7 +125,7 @@ const ProductInfo = () => {
                   <MDBBtn
                     noRipple
                     // outline
-                    color="warning"
+                    color="info"
                     onClick={() => {
                       setColor(colr);
                     }}
@@ -150,7 +150,8 @@ const ProductInfo = () => {
               noRipple
               // outline
               className="mx-2"
-              color="info"
+              color="primary"
+              
               onClick={() => {
                 {
                   token ? notifyBag() : navigate("/users/login");
@@ -190,7 +191,7 @@ const ProductInfo = () => {
               noRipple
               // outline
               className="mx-2"
-              color="info"
+              color="primary"
               onClick={() => {
                 {
                   token ? notifyFav() : navigate("/users/login");
@@ -216,7 +217,7 @@ const ProductInfo = () => {
         <MDBBtn
           noRipple
           // outline
-          color="success"
+          color="secondary"
           className="w-25"
           onClick={() => {
             navigate(-1);
@@ -227,7 +228,7 @@ const ProductInfo = () => {
         <MDBBtn
           noRipple
           // outline
-          color="success"
+          color="secondary"
           className="w-25"
           onClick={() => {
             navigate("/card");
