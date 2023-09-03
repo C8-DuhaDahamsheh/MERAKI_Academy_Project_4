@@ -245,9 +245,9 @@ const Order = () => {
                               .delete(`http://localhost:5000/order/${orderId}`)
                               .then((response) => {
                                 console.log(response);
-                                setOrder(order.filter((ordr)=>{
-                                  return ordr._id !== order._id
-                                }))
+                                // setOrder(order.filter((ordr)=>{
+                                //   return ordr._id !== order._id
+                                // }))
                                 
                               })
                               .catch((err) => {

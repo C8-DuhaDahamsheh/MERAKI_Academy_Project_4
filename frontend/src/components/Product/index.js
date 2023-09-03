@@ -60,7 +60,7 @@ const Product = () => {
     });
 
 
-  if (item === undefined) {
+  if ( item.length == 0) {
     <div className={"item"}>
       <Loader
         type="bubble-loop"

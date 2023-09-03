@@ -105,7 +105,9 @@ const [email, setEmail] = useState("")
       />
        <ToastContainer />
        
-       <MDBInput type="submit" value="Send" className='send w-25' />
+       <MDBInput type="submit" value="Send" className='send w-25' onClick={()=>{
+        success ? notifySucc() : notifyErr()
+       }} />
 
       {/* <MDBBtn noRipple type='submit' className='mb-4' block  value="Send" onClick={()=>{
         success ? notifySucc() : notifyErr()
