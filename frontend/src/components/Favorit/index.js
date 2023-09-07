@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
 import axios from "axios";
 import Loader from "react-js-loader";
-import "../Favorit/style.css"
+import "../Favorit/style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -13,9 +13,7 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardImage,
-  MDBIcon,
   MDBBtn,
-  MDBRipple,
   MDBCardTitle,
   MDBCardText,
 } from "mdb-react-ui-kit";
@@ -23,7 +21,6 @@ import {
 const Favorit = () => {
   const { userId } = useContext(userContext);
   const [itemInfo, setItemInfo] = useState([]);
-  const [update, setUpdate] = useState();
 
   const navigate = useNavigate();
 
@@ -136,16 +133,21 @@ const Favorit = () => {
               </div>
             );
           })}
-          
         </MDBRow>
         <ToastContainer />
         <div className="backButton">
-        <MDBBtn noRipple  color="secondary" className="w-100" onClick={()=>{
-        navigate("/category")
-      }}>Back To Home</MDBBtn>
-      </div>
+          <MDBBtn
+            noRipple
+            color="secondary"
+            className="w-100"
+            onClick={() => {
+              navigate("/category");
+            }}
+          >
+            Back To Home
+          </MDBBtn>
+        </div>
       </MDBContainer>
-      
     </div>
   );
 };

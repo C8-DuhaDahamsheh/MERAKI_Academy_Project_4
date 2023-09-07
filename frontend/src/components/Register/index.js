@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin } from "@react-oauth/google";
 import { decodeToken } from "react-jwt";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import "../Register/style.css"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../Register/style.css";
 import {
   MDBBtn,
   MDBContainer,
@@ -27,46 +27,51 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [google ,setGoogle] = useState ()
+  const [google, setGoogle] = useState();
   const navigate = useNavigate();
 
+  const notifySucc = () =>
+    toast.success(
+      { success },
+      {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      }
+    );
 
-  const notifySucc = () => toast.success({success}, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    });
-
-
-    const notifyErr = () => toast.error({error}, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
+  const notifyErr = () =>
+    toast.error(
+      { error },
+      {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      }
+    );
 
   const responseMessage = (response) => {
     console.log(response);
-    const a = decodeToken(response.credential)
+    const a = decodeToken(response.credential);
     console.log(a);
-    setGoogle(a)
-};
-const errorMessage = (error) => {
+    setGoogle(a);
+  };
+  const errorMessage = (error) => {
     console.log(error);
-};
+  };
   return (
     <div className="registerPag">
-      
-      <MDBContainer  >
+      <MDBContainer>
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>
             <MDBRow>
@@ -78,31 +83,39 @@ const errorMessage = (error) => {
                 <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
-                
-                  <MDBBtn noRipple  outline onClick={() => {
+
+                <MDBBtn
+                  noRipple
+                  outline
+                  onClick={() => {
                     axios
                       .post("http://localhost:5000/users/register", {
                         fname: google.given_name,
                         lname: google.family_name,
-                        email :google.email,
-                        password :google.sub,
-                        age :google.iat,
-                        country :google.jti,
+                        email: google.email,
+                        password: google.sub,
+                        age: google.iat,
+                        country: google.jti,
                       })
                       .then((response) => {
-                        
                         navigate("/users/login");
                         setSuccess(response.data.message);
-                        notifySucc()
+                        notifySucc();
                       })
                       .catch((err) => {
                         console.log(err);
                         setError(err.response.data.err);
-                        notifyErr()
-
+                        notifyErr();
                       });
-                  }}><GoogleLogin onSuccess={responseMessage} onError={errorMessage} />Register With Google</MDBBtn>
-                <br/>
+                  }}
+                >
+                  <GoogleLogin
+                    onSuccess={responseMessage}
+                    onError={errorMessage}
+                  />
+                  Register With Google
+                </MDBBtn>
+                <br />
                 <div className="d-flex flex-row align-items-center mb-4 ">
                   <MDBIcon fas icon="user me-3" size="lg" />
                   <MDBInput
@@ -111,8 +124,7 @@ const errorMessage = (error) => {
                     type="text"
                     className="w-100"
                     onChange={(e) => {
-                      setFirstName(e.target.value );
-                       
+                      setFirstName(e.target.value);
                     }}
                   />
                 </div>
@@ -124,7 +136,7 @@ const errorMessage = (error) => {
                     type="text"
                     className="w-100"
                     onChange={(e) => {
-                      setLastName(e.target.value );
+                      setLastName(e.target.value);
                     }}
                   />
                 </div>
@@ -178,16 +190,6 @@ const errorMessage = (error) => {
                     }}
                   />
                 </div>
-
-                {/* <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="key me-3" size="lg" />
-                  <MDBInput
-                    label="Repeat your password"
-                    id="form4"
-                    type="password"
-                  />
-                </div> */}
-
                 <div className="mb-4">
                   <MDBCheckbox
                     name="flexCheck"
@@ -197,28 +199,29 @@ const errorMessage = (error) => {
                   />
                 </div>
 
-                <MDBBtn  noRipple
+                <MDBBtn
+                  noRipple
                   className="mb-4"
                   size="lg"
                   onClick={() => {
                     axios
                       .post("http://localhost:5000/users/register", {
-                        fname : fName,
-                        lname:lName,
-                        email ,
-                        password ,
-                        age ,
-                        country ,
+                        fname: fName,
+                        lname: lName,
+                        email,
+                        password,
+                        age,
+                        country,
                       })
                       .then((response) => {
                         setSuccess(response.data.message);
                         navigate("/users/login");
-                        notifySucc()
+                        notifySucc();
                       })
                       .catch((err) => {
                         console.log(err);
                         setError(err.response.data.err);
-                        notifyErr()
+                        notifyErr();
                       });
                   }}
                 >
@@ -243,77 +246,6 @@ const errorMessage = (error) => {
         </MDBCard>
         <ToastContainer />
       </MDBContainer>
-      {/* <input
-        type="text"
-        placeholder="First Name"
-        onChange={(e) => {
-          setFirstName(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        placeholder="Last Name"
-        onChange={(e) => {
-          setLastName(e.target.value);
-        }}
-      /> */}
-
-      {/* <input
-        type="number"
-        placeholder="Age"
-        onChange={(e) => {
-          setAge(e.target.value);
-        }}
-      /> */}
-      {/* <input
-        type="text"
-        placeholder="Country"
-        onChange={(e) => {
-          setCountry(e.target.value);
-        }}
-      />
-
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      /> */}
-
-      {/* <button
-        onClick={() => {
-          axios
-            .post("http://localhost:5000/users/register", {
-              fname: fName,
-              lname: lName,
-              email,
-              password,
-              age,
-              country,
-            })
-            .then((response) => {
-              setSuccess(response.data.message);
-              navigate("/users/login");
-            })
-            .catch((err) => {
-              console.log(err);
-              setError(err.response.data.err);
-            });
-        }}
-      >
-        Register
-      </button> */}
-
-      
     </div>
   );
 };

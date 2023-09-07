@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../NavBar/style.css";
 import {
@@ -12,18 +12,10 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBBtn,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
   MDBCollapse,
-  MDBCol,
-  MDBFormInline,
 } from "mdb-react-ui-kit";
 
-import { IconName } from "react-icons/di";
 const NavBar = () => {
-  const [showNav, setShowNav] = useState(false);
   const [search, setSearch] = useState([]);
   const navigate = useNavigate();
   const [input, setInput] = useState("");
@@ -134,57 +126,6 @@ const NavBar = () => {
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
-
-      {/* {input ? (
-       <div className="input">
-         {search.map((name, i) => {
-           return (
-             <div key={i}>
-               <p
-                 onClick={() => {
-                   navigate(`/productInfo/${name._id}`);
-                 }}
-               >
-                 {name.name}
-               </p>
-             </div>
-           );
-         })}
-       </div>
-     ) : 
-     null
-     } */}
-      {/* <Link to="/category">Home</Link>
-      <br />
-      <Link to="/users/login">Login</Link>
-      <br />
-      <Link to="/users/register">Register</Link>
-      <br />
-      <Link to="/card">Card</Link> */}
-
-      {/* <input
-        type="Search"
-        id="test"
-        placeholder="Type to search.."
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-
-      <button
-        onClick={() => {
-          axios
-            .get(`http://localhost:5000/product?name=${input}`)
-            .then((response) => {
-              setSearch(response.data.product);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        Search
-      </button>  */}
     </div>
   );
 };

@@ -14,7 +14,6 @@ import {
   MDBCardImage,
   MDBBtn,
   MDBInput,
-  MDBIcon,
   MDBCol,
   MDBRow,
 } from "mdb-react-ui-kit";
@@ -148,10 +147,8 @@ const ProductInfo = () => {
             </MDBCardBody>
             <MDBBtn
               noRipple
-              // outline
               className="mx-2"
               color="primary"
-              
               onClick={() => {
                 {
                   token ? notifyBag() : navigate("/users/login");
@@ -238,105 +235,6 @@ const ProductInfo = () => {
         </MDBBtn>
       </MDBCard>
       <ToastContainer />
-
-      {/* <img src={itemInfo.image} width="350" height="350" />
-        <div className="info">
-          <h3>{itemInfo.name}</h3>
-          <h3>Price :{itemInfo.price} JD</h3>
-          <h3>Product Detail :</h3>
-          <h3>{itemInfo.discreption}</h3>
-          <h3>Size :</h3>
-          {itemInfo.size.map((siz, i) => {
-            return (
-              <input
-                key={i}
-                value={siz}
-                onClick={() => {
-                  setSize(siz);
-                }}
-              />
-            );
-          })}
-          <h3>Color :</h3>
-          {itemInfo.color.map((colr, i) => {
-            return (
-              <input
-                key={i}
-                value={colr}
-                onClick={() => {
-                  setColor(colr);
-                }}
-              />
-            );
-          })}
-          <br />
-          <input
-            type="number"
-            placeholder="Quantity"
-            onChange={(e) => {
-              setQuantity(e.target.value);
-            }}
-          />
-        </div>
-      </div>
-      <br />
-      <button
-        onClick={() => {
-          console.log(color);
-          console.log(size);
-          {
-            token ? navigate(`/card`) : navigate("/users/login");
-          }
-          axios
-            .post(
-              "http://localhost:5000/card/",
-              { product: itemInfo._id, quantity, isOrderd: false, color, size },
-              {
-                headers: {
-                  authorization: `Bearer ${token}`,
-                },
-              }
-            )
-            .then((respones) => {
-              console.log(respones.data);
-              setCardId([...cardId, respones.data.card._id]);
-              localStorage.setItem("cardId", respones.data.card._id);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        ADD TO BAG
-      </button>
-      <button
-        onClick={() => {
-          {
-            token ? navigate(`/favorit`) : navigate("/users/login");
-          }
-
-          axios
-            .post(
-              "http://localhost:5000/card/",
-              { product: itemInfo._id, quantity, isOrderd: false, color, size },
-              {
-                headers: {
-                  authorization: `Bearer ${token}`,
-                },
-              }
-            )
-            .then((respones) => {
-              console.log(respones.data);
-              setCardId([...cardId, respones.data.card._id]);
-              localStorage.setItem("cardId", respones.data.card._id);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        ADD TO FAVORIT
-      </button> */}
     </div>
   );
 };

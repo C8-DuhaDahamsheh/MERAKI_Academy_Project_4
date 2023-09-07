@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useState, createContext, useId } from "react";
-import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
+import React, { useState, createContext } from "react";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Category from "./components/Category";
 import Product from "./components/Product";
@@ -14,12 +14,11 @@ import ContactUs from "./components/ContactUs";
 
 export const userContext = createContext();
 function App() {
-  const navigate = useNavigate();
   const tok = localStorage.getItem("token");
   const usrId = localStorage.getItem("userId");
   const ordrId = localStorage.getItem("orderId");
   const crdId = localStorage.getItem("cardId");
-  const totalCost =localStorage.getItem("total")
+  const totalCost = localStorage.getItem("total");
   const [categId, setCategId] = useState("");
   const [info, setInfo] = useState([]);
   const [token, setToken] = useState(tok || "");
@@ -31,14 +30,13 @@ function App() {
   const [ordered, setOrdered] = useState(false);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-  const [total, setTotal] = useState(totalCost||0);
+  const [total, setTotal] = useState(totalCost || 0);
 
   console.log(productId);
-console.log(cardId); 
+  console.log(cardId);
 
   return (
     <div className="App">
-      
       <NavBar />
       <userContext.Provider
         value={{
@@ -75,9 +73,9 @@ console.log(cardId);
           <Route path="/users/register" element={<Register />} />
           <Route path="/users/login" element={<Login />} />
           <Route path="/card" element={<Card />} />
-          <Route path="/favorit" element={<Favorit/>}/>
+          <Route path="/favorit" element={<Favorit />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/contactUs" element={<ContactUs/>}/>
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
       </userContext.Provider>
     </div>
