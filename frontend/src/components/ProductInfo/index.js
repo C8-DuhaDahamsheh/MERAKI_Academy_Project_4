@@ -24,7 +24,7 @@ const ProductInfo = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
+  
   const {
     token,
     setShow,
@@ -40,7 +40,7 @@ const ProductInfo = () => {
     axios
       .get(`http://localhost:5000/product/${id}`)
       .then((response) => {
-        console.log(response.data.product);
+   
         setItemInfo(response.data.product);
       })
       .catch((error) => {
@@ -170,7 +170,7 @@ const ProductInfo = () => {
                     }
                   )
                   .then((respones) => {
-                    console.log(respones.data);
+                    
                     setCardId([...cardId, respones.data.card._id]);
                     localStorage.setItem("cardId", [respones.data.card._id]);
                   })

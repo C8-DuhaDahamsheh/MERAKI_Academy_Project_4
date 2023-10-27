@@ -27,9 +27,9 @@ const NavBar = () => {
         <MDBContainer fluid>
           <MDBNavbarBrand href="#" className="navbarImeg">
             <img
-              src="https://png2.cleanpng.com/sh/37e89fda72e78474130b352436713d5c/L0KzQYm3V8A0N6p4jZH0aYP2gLBuTgBmeqR0htN1LXL1cbBrif5oNZN3edDtLX3kfrLuhf1mdqUyedZBZYL3ecTwjvcuaqZ4RadrM3O3RoG4gsdnOpU4RqQ5Nki6RoSAUcU0OGc8Tqk8N0e4Q4a1kP5o/kisspng-personal-branding-brand-management-advertising-bus-5b3c4601b7f2d3.2068763715306767377535.png "
-              height="50"
-              width="150"
+              src="\BRANDING STOR (2).png"
+              height="80"
+              width="100"
               alt=""
               loading="lazy"
             />

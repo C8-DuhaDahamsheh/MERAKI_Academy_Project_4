@@ -61,9 +61,8 @@ const Register = () => {
     );
 
   const responseMessage = (response) => {
-    console.log(response);
     const a = decodeToken(response.credential);
-    console.log(a);
+
     setGoogle(a);
   };
   const errorMessage = (error) => {
@@ -80,7 +79,7 @@ const Register = () => {
                 lg="6"
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
               >
-                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                <p className="text-center h3 fw-bold ">
                   Sign up
                 </p>
 
@@ -116,80 +115,77 @@ const Register = () => {
                   Register With Google
                 </MDBBtn>
                 <br />
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    label="First Name"
-                    id="form1"
-                    type="text"
-                    className="w-100"
-                    onChange={(e) => {
-                      setFirstName(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    label="Last Name"
-                    id="form2"
-                    type="text"
-                    className="w-100"
-                    onChange={(e) => {
-                      setLastName(e.target.value);
-                    }}
-                  />
-                </div>
+                <MDBRow>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="First Name"
+                      id="form1"
+                      type="text"
+                      className="w-100"
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="Last Name"
+                      id="form2"
+                      type="text"
+                      className="w-100"
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="Your Age"
+                      id="form3"
+                      type="number"
+                      className="w-100"
+                      onChange={(e) => {
+                        setAge(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="Your Country"
+                      id="form4"
+                      type="text"
+                      className="w-100"
+                      onChange={(e) => {
+                        setCountry(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                </MDBRow>
 
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    label="Your Age"
-                    id="form3"
-                    type="number"
-                    className="w-100"
-                    onChange={(e) => {
-                      setAge(e.target.value);
-                    }}
-                  />
-                </div>
-
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    label="Your Country"
-                    id="form4"
-                    type="text"
-                    className="w-100"
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                    }}
-                  />
-                </div>
-
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="envelope me-3" size="lg" />
-                  <MDBInput
-                    label="Your Email"
-                    id="form5"
-                    type="email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  />
-                </div>
-
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="lock me-3" size="lg" />
-                  <MDBInput
-                    label="Password"
-                    id="form6"
-                    type="password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </div>
+                <MDBRow>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="Your Email"
+                      id="form5"
+                      type="email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                  <MDBCol md="6">
+                    <MDBInput
+                      label="Password"
+                      id="form6"
+                      type="password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </MDBCol>
+                </MDBRow>
                 <div className="mb-4">
                   <MDBCheckbox
                     name="flexCheck"

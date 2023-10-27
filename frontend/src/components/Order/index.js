@@ -34,7 +34,7 @@ const Order = () => {
     axios
       .get(`http://localhost:5000/order/${orderId}`)
       .then((response) => {
-        console.log(response.data.order);
+        
         setCard(response.data.order.card);
         setOrder(response.data.order);
         setUsers(response.data.order.user);
@@ -48,7 +48,7 @@ const Order = () => {
     <div className="bigContainer">
       <MDBContainer className="storContainer">
         {card.map((store, i) => {
-          console.log(store);
+      
           return (
             <MDBCard className="orederCard  rounded-3 mb-4">
               <MDBCardBody className="p-4">
@@ -188,7 +188,7 @@ const Order = () => {
                         axios
                           .delete(`http://localhost:5000/order/${orderId}`)
                           .then((response) => {
-                            console.log(response);
+                         
                           })
                           .catch((err) => {
                             console.log(err);

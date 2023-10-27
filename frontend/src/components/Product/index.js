@@ -17,6 +17,7 @@ import {
   MDBCardTitle,
   MDBCardText,
 } from "mdb-react-ui-kit";
+
 const Product = () => {
   const {
     setInfo,

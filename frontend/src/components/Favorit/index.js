@@ -28,7 +28,7 @@ const Favorit = () => {
     axios
       .get(`http://localhost:5000/favorit/user/${userId}`)
       .then((response) => {
-        console.log(response.data.product);
+       
         setItemInfo(response.data.product);
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ const Favorit = () => {
       theme: "colored",
     });
 
-  console.log(itemInfo);
+  
 
   if (itemInfo.length === 0) {
     return (
@@ -110,12 +110,11 @@ const Favorit = () => {
                             .delete(`http://localhost:5000/favorit/${fav._id}`)
                             .then((respones) => {
                               console.log(respones);
-                              console.log(itemInfo);
+                              
 
                               setItemInfo(
                                 itemInfo.filter((favo) => {
-                                  console.log(favo);
-                                  console.log(fav);
+                                  
                                   return favo._id !== fav._id;
                                 })
                               );

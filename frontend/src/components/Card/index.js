@@ -34,7 +34,7 @@ const Card = () => {
         },
       })
       .then((response) => {
-        // console.log(response.data.card);
+        
 
         setItem(response.data.card);
       })
@@ -45,7 +45,7 @@ const Card = () => {
         }
       });
   }, []);
-  console.log(item);
+
   const calculateTotal = (item) => {
     return item.product.price * item.quantity;
   };
@@ -56,7 +56,7 @@ const Card = () => {
   );
   setTotal(grandTotal);
   localStorage.setItem("total", grandTotal);
-  console.log(grandTotal);
+ 
 
   const notifySucc = () =>
     toast.success("Order Created...", {
@@ -199,7 +199,7 @@ const Card = () => {
                 outline
                 size="lg"
                 onClick={() => {
-                  console.log(cardId);
+                 
                   notifySucc();
                   axios
                     .post("http://localhost:5000/order/", {

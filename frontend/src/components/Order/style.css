@@ -1,17 +1,17 @@
  
-.storContainer{
+/* .storContainer{
     margin: 50px;
-}
+} */
 
 
 
 .bigContainer{
     border: 2px solid hsl(240, 25%, 90%);
-    margin: 40px 250px;
+    /* margin: 40px 250px; */
     background-color: hsl(240, 25%, 90%);
     box-shadow: 10px 10px 5px lightblue;
 }
 
-.orederCard{
+/* .orederCard{
     margin: 50px 150px;
-}
+} */

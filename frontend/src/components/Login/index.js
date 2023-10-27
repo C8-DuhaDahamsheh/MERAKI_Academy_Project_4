@@ -51,9 +51,8 @@ const Login = () => {
     );
 
   const responseMessage = (response) => {
-    console.log(response);
+    
     const a = decodeToken(response.credential);
-    console.log(a);
     setGoogle(a);
   };
   const errorMessage = (error) => {
@@ -117,7 +116,7 @@ const Login = () => {
                     password,
                   })
                   .then((response) => {
-                    console.log(response.data.userId);
+                   
                     setUserId(response.data.userId);
                     setSuccMssg(response.data.message);
                     setToken(response.data.token);
@@ -150,7 +149,7 @@ const Login = () => {
                     password: google.sub,
                   })
                   .then((response) => {
-                    console.log(response.data.userId);
+                   
                     setUserId(response.data.userId);
                     setSuccMssg(response.data.message);
                     setToken(response.data.token);
