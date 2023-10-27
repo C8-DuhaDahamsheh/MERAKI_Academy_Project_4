@@ -8,6 +8,6 @@ mongoose
     console.log("DB Ready To Use");
   })
   .catch((err) => {
-    console.log("hello");
+   
     console.log(err);
   });

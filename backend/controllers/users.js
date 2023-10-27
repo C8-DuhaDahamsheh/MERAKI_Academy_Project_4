@@ -36,13 +36,6 @@ const register = (req, res) => {
           message: `The email already exists`,
         });
       }
-      // if(err.errors){
-      //   return res.status(409).json({
-      //     success: false,
-      //     message: `The email should be like this (name_lastName@gmail.com)`,
-      //   });
-      // }
-      console.log(err.errors);
       res.status(500).json({
         success: false,
         message: `Server Error`,
@@ -85,7 +78,7 @@ const login = (req, res) => {
           expiresIn: "1h",
         };
         const token = jwt.sign(payload, process.env.SECRET, options);
-        console.log(token);
+      
         res.status(200).json({
           success: true,
           message: `Valid login credentials`,

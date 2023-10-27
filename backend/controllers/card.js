@@ -59,7 +59,7 @@ const updatByUserId = (req, res) => {
   cardModel
     .updateMany({ user: userId }, req.body, { new: true })
     .then((newCard) => {
-      console.log(newCard);
+     
       if (!newCard) {
         return res.status(404).json({
           success: false,
