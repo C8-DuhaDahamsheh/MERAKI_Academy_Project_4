@@ -88,7 +88,7 @@ const Register = () => {
                   outline
                   onClick={() => {
                     axios
-                      .post("http://localhost:5000/users/register", {
+                      .post(`${process.env.React_App_URL}/users/register`, {
                         fname: google.given_name,
                         lname: google.family_name,
                         email: google.email,
@@ -201,7 +201,7 @@ const Register = () => {
                   size="lg"
                   onClick={() => {
                     axios
-                      .post("http://localhost:5000/users/register", {
+                      .post(`${process.env.React_App_URL}/users/register`, {
                         fname: fName,
                         lname: lName,
                         email,

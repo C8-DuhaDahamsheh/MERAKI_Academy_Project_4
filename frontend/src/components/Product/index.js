@@ -38,7 +38,7 @@ const Product = () => {
   const [add, setAdd] = useState("");
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${id}/category`)
+      .get(`${process.env.React_App_URL}/product/${id}/category`)
       .then((respones) => {
         setItem(respones.data.product);
       })
@@ -118,7 +118,7 @@ const Product = () => {
                             token ? notify() : navigate("/users/login");
                           }
                           axios
-                            .post("http://localhost:5000/favorit", {
+                            .post(`${process.env.React_App_URL}/favorit`, {
                               product: produc._id,
                               user: userId,
                             })

@@ -26,7 +26,7 @@ const Favorit = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/favorit/user/${userId}`)
+      .get(`${process.env.React_App_URL}/favorit/user/${userId}`)
       .then((response) => {
        
         setItemInfo(response.data.product);
@@ -107,7 +107,7 @@ const Favorit = () => {
                         onClick={() => {
                           notifyFav();
                           axios
-                            .delete(`http://localhost:5000/favorit/${fav._id}`)
+                            .delete(`${process.env.React_App_URL}/favorit/${fav._id}`)
                             .then((respones) => {
                               console.log(respones);
                               

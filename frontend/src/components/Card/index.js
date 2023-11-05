@@ -28,7 +28,7 @@ const Card = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/card", {
+      .get(`${process.env.React_App_URL}/card`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -142,7 +142,7 @@ const Card = () => {
                             notifyErr();
                             axios
                               .delete(
-                                `http://localhost:5000/card/${store._id}`,
+                                `${process.env.React_App_URL}/card/${store._id}`,
                                 {
                                   headers: {
                                     authorization: `Bearer ${token}`,
@@ -202,7 +202,7 @@ const Card = () => {
                  
                   notifySucc();
                   axios
-                    .post("http://localhost:5000/order/", {
+                    .post(`${process.env.React_App_URL}/order/`, {
                       user: userId,
                       card: [...cardId],
                       phoneNumber,
@@ -237,7 +237,7 @@ const Card = () => {
                 onClick={() => {
                   axios
                     .put(
-                      `http://localhost:5000/card/${userId}/user`,
+                      `${process.env.React_App_URL}/card/${userId}/user`,
                       { isOrderd: true },
                       {
                         headers: {

@@ -32,7 +32,7 @@ const Order = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/order/${orderId}`)
+      .get(`${process.env.React_App_URL}/order/${orderId}`)
       .then((response) => {
         
         setCard(response.data.order.card);
@@ -186,7 +186,7 @@ const Order = () => {
                       className="mb-1"
                       onClick={() => {
                         axios
-                          .delete(`http://localhost:5000/order/${orderId}`)
+                          .delete(`${process.env.React_App_URL}/order/${orderId}`)
                           .then((response) => {
                          
                           })

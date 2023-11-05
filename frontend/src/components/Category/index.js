@@ -13,7 +13,7 @@ const Category = () => {
   const navigate = useNavigate();
   const getAllCategory = () => {
     axios
-      .get("http://localhost:5000/category")
+      .get(`${process.env.React_App_URL}/category`)
       .then((respones) => {
      
         setCateg(respones.data.category);

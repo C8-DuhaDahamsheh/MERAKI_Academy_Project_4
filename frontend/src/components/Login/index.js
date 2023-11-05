@@ -111,7 +111,7 @@ const Login = () => {
               onClick={() => {
                 notifySucc();
                 axios
-                  .post("http://localhost:5000/users/login", {
+                  .post(`${process.env.React_App_URL}/users/login`, {
                     email,
                     password,
                   })
@@ -144,7 +144,7 @@ const Login = () => {
               onClick={() => {
                 notifySucc();
                 axios
-                  .post("http://localhost:5000/users/login", {
+                  .post(`${process.env.React_App_URL}/users/login`, {
                     email: google.email,
                     password: google.sub,
                   })

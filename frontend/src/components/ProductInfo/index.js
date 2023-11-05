@@ -38,7 +38,7 @@ const ProductInfo = () => {
   } = useContext(userContext);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${id}`)
+      .get(`${process.env.React_App_URL}/product/${id}`)
       .then((response) => {
    
         setItemInfo(response.data.product);
@@ -155,7 +155,7 @@ const ProductInfo = () => {
                 }
                 axios
                   .post(
-                    "http://localhost:5000/card/",
+                    `${process.env.React_App_URL}/card/`,
                     {
                       product: itemInfo._id,
                       quantity,
@@ -194,7 +194,7 @@ const ProductInfo = () => {
                   token ? notifyFav() : navigate("/users/login");
                 }
                 axios
-                  .post("http://localhost:5000/favorit", {
+                  .post(`${process.env.React_App_URL}/favorit`, {
                     product: itemInfo._id,
                     user: userId,
                   })

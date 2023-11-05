@@ -93,7 +93,7 @@ const NavBar = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     axios
-                      .get(`http://localhost:5000/product?name=${input}`)
+                      .get(`${process.env.React_App_URL}/product?name=${input}`)
                       .then((response) => {
                         setSearch(response.data.product);
                       })
