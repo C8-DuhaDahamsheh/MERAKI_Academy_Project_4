@@ -47,3 +47,35 @@ margin: 10px 100px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 16px 32px;
   }
+
+
+  @media only screen and (max-width: 1000px) {
+    /* For mobile phones: */
+    .collection{
+      /* border: 5px solid blue; */
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr ;
+ 
+  }
+  }
+
+  
+  @media only screen and (max-width: 785px) {
+    /* For mobile phones: */
+    .collection{
+      /* border: 5px solid blue; */
+      display: grid;
+      grid-template-columns: 1fr 1fr  ;
+      margin: 10px 20px;
+  }
+  }
+
+  @media only screen and (max-width: 450px) {
+    /* For mobile phones: */
+    .collection{
+      /* border: 5px solid blue; */
+      display: grid;
+      grid-template-columns: 1fr ;
+      margin: 10px 20px;
+  }
+  }

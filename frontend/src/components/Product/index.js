@@ -73,12 +73,13 @@ const Product = () => {
 
   return (
     <div className="product">
-      <MDBContainer>
-        <MDBRow className="row-cols-3 row-cols-md-3 g-4">
+      {/* <MDBContainer> */}
+        {/* <MDBRow className="row-cols-3 row-cols-md-3 g-4"> */}
+          <div className="responsve" >
           {item.map((produc, i) => {
             return (
               <div key={i}>
-                <MDBCol size="md" className="h-100">
+                <MDBCol size="md" className="h-100" >
                   <MDBCard className="h-100 w-75">
                     <MDBCardImage
                       src={produc.image}
@@ -140,10 +141,10 @@ const Product = () => {
               </div>
             );
           })}
-
+</div>
           <ToastContainer />
-        </MDBRow>
-      </MDBContainer>
+        {/* </MDBRow> */}
+      {/* </MDBContainer> */}
       <div className="buttonProduct">
         <MDBBtn
           noRipple

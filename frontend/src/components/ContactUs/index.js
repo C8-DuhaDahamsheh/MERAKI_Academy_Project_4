@@ -110,7 +110,7 @@ const ContactUs = () => {
         <MDBInput
           type="submit"
           value="Send"
-          className="send w-25"
+          className="send w-50"
           onClick={() => {
             success ? notifySucc() : notifyErr();
           }}

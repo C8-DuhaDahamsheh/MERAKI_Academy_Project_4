@@ -66,8 +66,9 @@ const Favorit = () => {
 
   return (
     <div className="favo">
-      <MDBContainer>
-        <MDBRow className="row-cols-3 row-cols-md-3 g-4">
+      {/* <MDBContainer> */}
+        {/* <MDBRow className="row-cols-3 row-cols-md-3 g-4"> */}
+        <div className="responsve" >
           {itemInfo.map((fav, i) => {
             return (
               <div key={i}>
@@ -132,7 +133,8 @@ const Favorit = () => {
               </div>
             );
           })}
-        </MDBRow>
+          </div>
+        {/* </MDBRow> */}
         <ToastContainer />
         <div className="backButton">
           <MDBBtn
@@ -146,7 +148,7 @@ const Favorit = () => {
             Back To Home
           </MDBBtn>
         </div>
-      </MDBContainer>
+      {/* </MDBContainer> */}
     </div>
   );
 };

@@ -18,3 +18,26 @@
     background-color: rgb(240, 243, 255);
     border-color: rgb(184, 30, 3);
 }
+
+
+@media only screen and (max-width: 1200px) {
+    /* For mobile phones: */
+    .contact {
+        background-color: rgb(240, 243, 255);
+        /* border: 5px solid rgb(211, 233, 252) ;  */
+        margin: 10px 100px;
+      
+    }
+  }
+
+  
+
+  @media only screen and (max-width: 450px) {
+    /* For mobile phones: */
+    .contact {
+        background-color: rgb(240, 243, 255);
+        /* border: 5px solid rgb(211, 233, 252) ;  */
+        margin: 10px 50px;
+      
+    }
+  }
